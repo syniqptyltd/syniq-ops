@@ -16,8 +16,9 @@ export async function signIn(email: string, password: string) {
     return { error: error.message }
   }
 
+  // Return success without redirect - let the client handle it
   revalidatePath("/dashboard", "layout")
-  redirect("/dashboard")
+  return { success: true }
 }
 
 export async function signUp(email: string, password: string, businessName: string) {
@@ -38,7 +39,22 @@ export async function signUp(email: string, password: string, businessName: stri
     return { error: error.message }
   }
 
-  return { success: true, message: "Check your email to confirm your account" }
+  // Check if email confirmation is required
+  // If user session exists immediately, email confirmation is disabled
+  if (data?.session) {
+    return {
+      success: true,
+      message: "Account created successfully! You can now log in.",
+      autoConfirmed: true
+    }
+  }
+
+  // Email confirmation is required
+  return {
+    success: true,
+    message: "Check your email to confirm your account",
+    autoConfirmed: false
+  }
 }
 
 export async function signOut() {

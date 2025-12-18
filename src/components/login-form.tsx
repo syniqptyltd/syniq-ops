@@ -56,11 +56,13 @@ export function LoginForm() {
 
       if (result?.error) {
         setFormError(result.error)
+        setIsLoading(false)
+      } else if (result?.success) {
+        // Success - redirect to dashboard
+        window.location.href = "/dashboard"
       }
-      // If successful, the signIn action will redirect to /dashboard
     } catch (error) {
       setFormError("An unexpected error occurred. Please try again.")
-    } finally {
       setIsLoading(false)
     }
   }
