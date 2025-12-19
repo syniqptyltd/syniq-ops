@@ -4,7 +4,7 @@ import type React from "react"
 
 import Image from 'next/image';
 
-import { LayoutDashboard, Users, Briefcase, FileText, Settings, Menu, LogOut, Building2, Receipt, Calculator } from "lucide-react"
+import { LayoutDashboard, Users, Briefcase, FileText, Settings, Menu, LogOut, Building2, Receipt, Calculator, Crown } from "lucide-react"
 import Link from "next/link"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
@@ -20,6 +20,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { getUser, signOut } from "@/lib/supabase/actions"
+import { SubscriptionBanner } from "@/components/dashboard/subscription-banner"
 
 const navigation = [
   { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
@@ -172,6 +173,12 @@ export default function DashboardLayout({
                   <span>Profile</span>
                 </Link>
               </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link href="/dashboard/subscription">
+                  <Crown className="mr-2 h-4 w-4" />
+                  <span>Subscription</span>
+                </Link>
+              </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem onClick={handleLogout} className="text-destructive focus:text-destructive">
                 <LogOut className="mr-2 h-4 w-4" />
@@ -183,7 +190,10 @@ export default function DashboardLayout({
 
         {/* Main Content */}
         <main className="flex-1 overflow-auto">
-          <div className="container mx-auto p-6 lg:p-8">{children}</div>
+          <div className="container mx-auto p-6 lg:p-8">
+            <SubscriptionBanner />
+            {children}
+          </div>
         </main>
       </div>
     </div>
