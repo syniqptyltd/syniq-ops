@@ -41,13 +41,13 @@ export async function POST(request: NextRequest) {
     // Handle different event types
     switch (event.event) {
       case 'charge.success':
-        await handleChargeSuccess(event.data)
+        await handleChargeSuccess(event.data, supabaseAdmin)
         break
 
       case 'subscription.create':
       case 'subscription.not_renew':
       case 'subscription.disable':
-        await handleSubscriptionEvent(event)
+        await handleSubscriptionEvent(event, supabaseAdmin)
         break
 
       default:
@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
 /**
  * Handle successful charge (payment)
  */
-async function handleChargeSuccess(data: any) {
+async function handleChargeSuccess(data: any, supabaseAdmin: any) {
   const reference = data.reference
   const amount = data.amount / 100 // Convert kobo to ZAR
   const customerEmail = data.customer.email
@@ -212,7 +212,7 @@ async function processOneTimePayment(payment: any, data: any) {
 /**
  * Handle subscription-specific events
  */
-async function handleSubscriptionEvent(event: any) {
+async function handleSubscriptionEvent(event: any, supabaseAdmin: any) {
   const subscriptionCode = event.data.subscription_code
 
   console.log('Processing subscription event:', event.event, subscriptionCode)
