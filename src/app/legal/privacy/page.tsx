@@ -106,7 +106,7 @@ export default function PrivacyPage() {
                 If you have any questions about this Privacy Policy or our data practices,
                 please contact us at:{" "}
                 <a
-                  href="mailto:syniw.store@gmail.com"
+                  href="mailto:syniq.store@gmail.com"
                   className="text-primary hover:underline font-medium"
                 >
                   syniq.store@gmail.com

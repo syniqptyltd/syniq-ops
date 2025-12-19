@@ -7,6 +7,7 @@ import "./globals.css"
 import { Plus_Jakarta_Sans as V0_Font_Plus_Jakarta_Sans, IBM_Plex_Mono as V0_Font_IBM_Plex_Mono, Lora as V0_Font_Lora } from 'next/font/google'
 
 import { Toaster } from "sonner"
+import { CookieConsent } from "@/components/cookie-consent"
 
 // Initialize fonts
 const _plusJakartaSans = V0_Font_Plus_Jakarta_Sans({ subsets: ['latin'], weight: ["200","300","400","500","600","700","800"] })
@@ -45,6 +46,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`font-sans antialiased`}>
         {children}
+        <CookieConsent />
         <Analytics />
         <Toaster richColors />
 

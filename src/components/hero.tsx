@@ -63,7 +63,10 @@ export function Hero() {
 
           {/* Social proof */}
           <p className="mt-8 text-sm text-muted-foreground">
-            No credit card required • Free to start
+            No credit card required • Free to start •{" "}
+            <Link href="/pricing" className="text-primary hover:underline">
+              View Pricing
+            </Link>
           </p>
         </div>
       </div>

@@ -29,6 +29,11 @@ export function Footer() {
             <h3 className="mb-3 text-sm font-semibold text-foreground">Product</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li>
+                <Link href="/pricing" className="hover:text-foreground transition-colors">
+                  Pricing
+                </Link>
+              </li>
+              <li>
                 <Link href="/signup" className="hover:text-foreground transition-colors">
                   Get Started
                 </Link>
@@ -97,10 +102,10 @@ export function Footer() {
               © {new Date().getFullYear()} Syniq (Pty) Ltd. All rights reserved.
             </p>
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
-              <Link href="/privacy" className="hover:text-foreground transition-colors">
+              <Link href="/legal/privacy" className="hover:text-foreground transition-colors">
                 Privacy
               </Link>
-              <Link href="/terms" className="hover:text-foreground transition-colors">
+              <Link href="/legal/terms" className="hover:text-foreground transition-colors">
                 Terms
               </Link>
             </div>
