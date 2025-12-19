@@ -113,16 +113,16 @@ async function handleChargeSuccess(data: any, supabaseAdmin: any) {
 
   // Process based on payment type
   if (payment.payment_type === 'subscription') {
-    await processSubscriptionPayment(payment, data)
+    await processSubscriptionPayment(payment, data, supabaseAdmin)
   } else if (payment.payment_type === 'one-time') {
-    await processOneTimePayment(payment, data)
+    await processOneTimePayment(payment, data, supabaseAdmin)
   }
 }
 
 /**
  * Process subscription payment
  */
-async function processSubscriptionPayment(payment: any, data: any) {
+async function processSubscriptionPayment(payment: any, data: any, supabaseAdmin: any) {
   const userId = payment.user_id
   const planId = payment.plan_id
   const billingCycle = payment.billing_cycle
@@ -180,7 +180,7 @@ async function processSubscriptionPayment(payment: any, data: any) {
 /**
  * Process one-time payment (annual/lifetime)
  */
-async function processOneTimePayment(payment: any, data: any) {
+async function processOneTimePayment(payment: any, data: any, supabaseAdmin: any) {
   const userId = payment.user_id
   const productType = payment.product_type
 
