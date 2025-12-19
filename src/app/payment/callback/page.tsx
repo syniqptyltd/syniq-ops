@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, Suspense } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
@@ -9,7 +9,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { CheckCircle2, Loader2, XCircle } from "lucide-react"
 import Link from "next/link"
 
-export default function PaymentCallbackPage() {
+function PaymentCallbackContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const reference = searchParams.get("reference")
@@ -117,5 +117,32 @@ export default function PaymentCallbackPage() {
       </main>
       <Footer />
     </div>
+  )
+}
+
+export default function PaymentCallbackPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex min-h-screen flex-col">
+        <Navbar />
+        <main className="flex-1 bg-background">
+          <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 lg:px-8">
+            <Card>
+              <CardContent className="pt-12 pb-12">
+                <div className="flex flex-col items-center text-center">
+                  <Loader2 className="h-16 w-16 text-primary animate-spin mb-6" />
+                  <h1 className="text-2xl font-bold text-foreground mb-2">
+                    Loading...
+                  </h1>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    }>
+      <PaymentCallbackContent />
+    </Suspense>
   )
 }
