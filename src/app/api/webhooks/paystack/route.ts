@@ -10,12 +10,6 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createClient } from '@supabase/supabase-js'
 import { verifyWebhookSignature, verifyTransaction } from '@/lib/paystack/client'
 
-// Create Supabase client with service role for webhook processing
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
-)
-
 export async function POST(request: NextRequest) {
   try {
     // Get the raw body for signature verification
@@ -26,6 +20,12 @@ export async function POST(request: NextRequest) {
       console.error('Missing Paystack signature')
       return NextResponse.json({ error: 'Missing signature' }, { status: 401 })
     }
+
+    // Create Supabase client with service role for webhook processing
+    const supabaseAdmin = createClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.SUPABASE_SERVICE_ROLE_KEY!
+    )
 
     // Verify webhook signature
     const isValid = verifyWebhookSignature(body, signature)
