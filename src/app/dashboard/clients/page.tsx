@@ -5,10 +5,13 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Plus, MoreHorizontal, Eye, Pencil, Trash2, Users } from "lucide-react"
+import { Plus, MoreHorizontal, Eye, Pencil, Trash2, Users, Crown, AlertCircle } from "lucide-react"
 import { ClientModal } from "@/components/client-modal"
 import { getClients, deleteClient } from "@/lib/supabase/actions"
 import { useRouter } from "next/navigation"
+import { useSubscription } from "@/hooks/use-subscription"
+import { Alert, AlertDescription } from "@/components/ui/alert"
+import Link from "next/link"
 
 type Client = {
   id: string
@@ -25,6 +28,7 @@ export default function ClientsPage() {
   const [isLoading, setIsLoading] = useState(true)
   const [modalOpen, setModalOpen] = useState(false)
   const [selectedClient, setSelectedClient] = useState<Client | null>(null)
+  const { permissions, planId, loading: subscriptionLoading } = useSubscription()
 
   useEffect(() => {
     loadClients()
@@ -38,9 +42,16 @@ export default function ClientsPage() {
   }
 
   const handleAddClient = () => {
+    // Check if user has reached client limit
+    if (permissions.maxClients !== null && clients.length >= permissions.maxClients) {
+      return // Don't open modal if limit reached
+    }
     setSelectedClient(null)
     setModalOpen(true)
   }
+
+  const canAddClient = permissions.maxClients === null || clients.length < permissions.maxClients
+  const clientsRemaining = permissions.maxClients ? permissions.maxClients - clients.length : null
 
   const handleViewClient = (clientId: string) => {
     // Navigate to client detail page or open modal
@@ -84,13 +95,56 @@ export default function ClientsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Clients</h1>
-          <p className="text-muted-foreground mt-1">Manage your client relationships</p>
+          <p className="text-muted-foreground mt-1">
+            Manage your client relationships
+            {permissions.maxClients !== null && (
+              <span className="ml-2 text-sm">
+                ({clients.length} / {permissions.maxClients} clients)
+              </span>
+            )}
+          </p>
         </div>
-        <Button onClick={handleAddClient}>
+        <Button onClick={handleAddClient} disabled={!canAddClient}>
           <Plus className="mr-2 h-4 w-4" />
           Add Client
         </Button>
       </div>
+
+      {/* Client limit warning */}
+      {permissions.maxClients !== null && clientsRemaining !== null && clientsRemaining <= 5 && clientsRemaining > 0 && (
+        <Alert className="border-orange-200 bg-orange-50">
+          <AlertCircle className="h-4 w-4 text-orange-600" />
+          <AlertDescription className="ml-2 flex items-center justify-between">
+            <span className="text-orange-900">
+              You have {clientsRemaining} client {clientsRemaining === 1 ? "slot" : "slots"} remaining on the Starter plan.
+            </span>
+            <Button asChild size="sm" variant="outline" className="ml-4">
+              <Link href="/pricing">
+                <Crown className="mr-2 h-4 w-4" />
+                Upgrade for Unlimited
+              </Link>
+            </Button>
+          </AlertDescription>
+        </Alert>
+      )}
+
+      {/* Client limit reached */}
+      {!canAddClient && (
+        <Alert className="border-red-200 bg-red-50">
+          <AlertCircle className="h-4 w-4 text-red-600" />
+          <AlertDescription className="ml-2 flex items-center justify-between">
+            <span className="text-red-900">
+              You've reached the maximum of {permissions.maxClients} clients on the Starter plan.
+            </span>
+            <Button asChild size="sm" className="ml-4">
+              <Link href="/pricing">
+                <Crown className="mr-2 h-4 w-4" />
+                Upgrade to Professional
+              </Link>
+            </Button>
+          </AlertDescription>
+        </Alert>
+      )}
 
       {clients.length === 0 ? (
         <Card>

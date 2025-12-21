@@ -93,15 +93,15 @@ export default function SubscriptionPage() {
         </CardHeader>
         <CardContent className="space-y-4">
           {!data?.hasAccess && (
-            <div className="flex items-center justify-between p-4 border rounded-lg">
+            <div className="flex items-center justify-between p-4 border rounded-lg bg-red-50 border-red-200">
               <div>
-                <p className="font-medium">Free Plan</p>
-                <p className="text-sm text-muted-foreground">Limited features and access</p>
+                <p className="font-medium text-red-900">No Active Subscription</p>
+                <p className="text-sm text-red-700">Your trial has expired. Subscribe to continue using Syniq Ops.</p>
               </div>
               <Button asChild>
                 <Link href="/pricing">
                   <Crown className="mr-2 h-4 w-4" />
-                  Upgrade Now
+                  Subscribe Now
                 </Link>
               </Button>
             </div>
@@ -113,36 +113,70 @@ export default function SubscriptionPage() {
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
                     <p className="font-medium capitalize">{data.subscription.plan_id} Plan</p>
-                    <Badge variant={data.subscription.status === "active" ? "default" : "secondary"}>
-                      {data.subscription.status}
+                    <Badge variant={data.subscription.status === "active" ? "default" : data.subscription.status === "trialing" ? "secondary" : "outline"}>
+                      {data.subscription.status === "trialing" ? "Free Trial" : data.subscription.status}
                     </Badge>
                     {data.subscription.cancel_at_period_end && (
                       <Badge variant="destructive">Canceling</Badge>
                     )}
                   </div>
                   <p className="text-sm text-muted-foreground capitalize">
-                    {data.subscription.billing_cycle} billing
+                    {data.subscription.status === "trialing" ? "7-day free trial" : `${data.subscription.billing_cycle} billing`}
                   </p>
                 </div>
                 <div className="text-right">
-                  <p className="text-2xl font-bold">
-                    R{data.subscription.billing_cycle === "monthly" ? "599" : "5,970"}
-                  </p>
-                  <p className="text-sm text-muted-foreground">
-                    per {data.subscription.billing_cycle === "monthly" ? "month" : "year"}
-                  </p>
+                  {data.subscription.status === "trialing" ? (
+                    <>
+                      <p className="text-2xl font-bold">R0</p>
+                      <p className="text-sm text-muted-foreground">During trial</p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-2xl font-bold">
+                        R{data.subscription.billing_cycle === "monthly" ? "599" : "5,970"}
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        per {data.subscription.billing_cycle === "monthly" ? "month" : "year"}
+                      </p>
+                    </>
+                  )}
                 </div>
               </div>
 
               <div className="flex items-center gap-2 text-sm">
                 <Calendar className="h-4 w-4 text-muted-foreground" />
                 <span>
-                  {data.subscription.cancel_at_period_end ? "Expires" : "Renews"} on{" "}
-                  {new Date(data.subscription.current_period_end).toLocaleDateString()}
+                  {data.subscription.status === "trialing"
+                    ? `Trial ends on ${new Date(data.subscription.current_period_end).toLocaleDateString()}`
+                    : data.subscription.cancel_at_period_end
+                    ? `Expires on ${new Date(data.subscription.current_period_end).toLocaleDateString()}`
+                    : `Renews on ${new Date(data.subscription.current_period_end).toLocaleDateString()}`
+                  }
                 </span>
               </div>
 
-              {!data.subscription.cancel_at_period_end && (
+              {data.subscription.status === "trialing" && (
+                <div className="flex items-center gap-2 p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                  <AlertCircle className="h-5 w-5 text-blue-600" />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-blue-900">
+                      {Math.ceil((new Date(data.subscription.current_period_end).getTime() - Date.now()) / (1000 * 60 * 60 * 24))} days remaining in your trial
+                    </p>
+                    <p className="text-xs text-blue-700 mt-1">
+                      Subscribe before your trial ends to continue using all features without interruption.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {data.subscription.status === "trialing" ? (
+                <Button asChild className="w-full">
+                  <Link href="/pricing">
+                    <Crown className="mr-2 h-4 w-4" />
+                    Subscribe Now
+                  </Link>
+                </Button>
+              ) : !data.subscription.cancel_at_period_end && (
                 <AlertDialog>
                   <AlertDialogTrigger asChild>
                     <Button variant="outline" className="w-full">

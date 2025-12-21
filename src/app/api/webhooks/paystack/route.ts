@@ -121,15 +121,16 @@ async function handleChargeSuccess(data: any, supabaseAdmin: any) {
 
 /**
  * Process subscription payment
+ * Converts trialing subscription to active paid subscription
  */
 async function processSubscriptionPayment(payment: any, data: any, supabaseAdmin: any) {
   const userId = payment.user_id
   const planId = payment.plan_id
   const billingCycle = payment.billing_cycle
 
-  console.log('Processing subscription for user:', userId)
+  console.log('Processing subscription payment for user:', userId)
 
-  // Calculate period dates
+  // Calculate period dates (subscription starts NOW for paid subscriptions)
   const now = new Date()
   const periodEnd = new Date(now)
   if (billingCycle === 'monthly') {
@@ -138,7 +139,7 @@ async function processSubscriptionPayment(payment: any, data: any, supabaseAdmin
     periodEnd.setFullYear(periodEnd.getFullYear() + 1)
   }
 
-  // Check if user has existing subscription
+  // Check if user has existing subscription (likely a trial)
   const { data: existingSubscription } = await supabaseAdmin
     .from('subscriptions')
     .select('*')
@@ -147,7 +148,8 @@ async function processSubscriptionPayment(payment: any, data: any, supabaseAdmin
     .single()
 
   if (existingSubscription) {
-    // Update existing subscription
+    // Convert trial to paid subscription or update existing subscription
+    console.log('Upgrading existing subscription from', existingSubscription.status, 'to active')
     await supabaseAdmin
       .from('subscriptions')
       .update({
@@ -157,11 +159,13 @@ async function processSubscriptionPayment(payment: any, data: any, supabaseAdmin
         current_period_end: periodEnd.toISOString(),
         cancel_at_period_end: false,
         paystack_customer_code: data.customer.customer_code,
-        status: 'active',
+        paystack_subscription_code: data.subscription?.subscription_code,
+        status: 'active', // Convert from trialing to active
       })
       .eq('id', existingSubscription.id)
   } else {
-    // Create new subscription
+    // Create new active subscription (rare case - user paid without trial)
+    console.log('Creating new active subscription for user:', userId)
     await supabaseAdmin.from('subscriptions').insert({
       user_id: userId,
       plan_id: planId,
@@ -174,7 +178,7 @@ async function processSubscriptionPayment(payment: any, data: any, supabaseAdmin
     })
   }
 
-  console.log('Subscription processed successfully for user:', userId)
+  console.log('Subscription activated successfully for user:', userId)
 }
 
 /**
@@ -194,6 +198,22 @@ async function processOneTimePayment(payment: any, data: any, supabaseAdmin: any
     expiresAt = expiryDate.toISOString()
   }
   // lifetime has no expiry (null)
+
+  // Cancel ALL existing subscriptions (trial and active) since they're upgrading to a one-time purchase
+  const { data: existingSubscriptions } = await supabaseAdmin
+    .from('subscriptions')
+    .select('*')
+    .eq('user_id', userId)
+    .in('status', ['trialing', 'active'])
+
+  if (existingSubscriptions && existingSubscriptions.length > 0) {
+    console.log(`Canceling ${existingSubscriptions.length} subscription(s) for user purchasing lifetime/annual:`, userId)
+    await supabaseAdmin
+      .from('subscriptions')
+      .update({ status: 'canceled' })
+      .eq('user_id', userId)
+      .in('status', ['trialing', 'active'])
+  }
 
   // Create purchase record
   await supabaseAdmin.from('purchases').insert({

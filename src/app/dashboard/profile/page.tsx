@@ -6,8 +6,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
-import { Loader2, Building2, Save } from "lucide-react"
+import { Badge } from "@/components/ui/badge"
+import { Loader2, Building2, Save, Crown, Calendar } from "lucide-react"
 import { getUserProfile, upsertUserProfile } from "@/lib/supabase/actions"
+import Link from "next/link"
 
 type ProfileData = {
   business_name: string
@@ -22,6 +24,12 @@ type ProfileData = {
   phone: string
   email: string
   website: string
+}
+
+interface SubscriptionStatus {
+  hasAccess: boolean
+  subscription: any | null
+  purchase: any | null
 }
 
 export default function ProfilePage() {
@@ -42,9 +50,12 @@ export default function ProfilePage() {
   const [isLoading, setIsLoading] = useState(true)
   const [isSaving, setIsSaving] = useState(false)
   const [saveMessage, setSaveMessage] = useState<{ type: "success" | "error"; text: string } | null>(null)
+  const [membershipStatus, setMembershipStatus] = useState<SubscriptionStatus | null>(null)
+  const [loadingMembership, setLoadingMembership] = useState(true)
 
   useEffect(() => {
     loadProfile()
+    loadMembershipStatus()
   }, [])
 
   const loadProfile = async () => {
@@ -69,6 +80,20 @@ export default function ProfilePage() {
     }
 
     setIsLoading(false)
+  }
+
+  const loadMembershipStatus = async () => {
+    try {
+      const response = await fetch("/api/subscription/status")
+      if (response.ok) {
+        const data = await response.json()
+        setMembershipStatus(data)
+      }
+    } catch (error) {
+      console.error("Error loading membership status:", error)
+    } finally {
+      setLoadingMembership(false)
+    }
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -109,6 +134,143 @@ export default function ProfilePage() {
           Manage your business information used in invoices and documents
         </p>
       </div>
+
+      {/* Membership Status */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Crown className="h-5 w-5" />
+            Membership Status
+          </CardTitle>
+          <CardDescription>Your current subscription or purchase details</CardDescription>
+        </CardHeader>
+        <CardContent>
+          {loadingMembership ? (
+            <div className="flex items-center gap-2 text-muted-foreground">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Loading membership status...
+            </div>
+          ) : !membershipStatus?.hasAccess ? (
+            <div className="flex items-center justify-between p-4 border rounded-lg bg-red-50 border-red-200">
+              <div>
+                <p className="font-medium text-red-900">No Active Subscription</p>
+                <p className="text-sm text-red-700">Your trial has expired. Subscribe to continue.</p>
+              </div>
+              <Button asChild size="sm">
+                <Link href="/pricing">
+                  <Crown className="mr-2 h-4 w-4" />
+                  Subscribe Now
+                </Link>
+              </Button>
+            </div>
+          ) : membershipStatus?.subscription ? (
+            <div className="space-y-3">
+              <div className="flex items-center justify-between p-4 border rounded-lg">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <p className="font-medium capitalize">{membershipStatus.subscription.plan_id} Plan</p>
+                    <Badge variant={membershipStatus.subscription.status === "active" ? "default" : membershipStatus.subscription.status === "trialing" ? "secondary" : "outline"}>
+                      {membershipStatus.subscription.status === "trialing" ? "Free Trial" : membershipStatus.subscription.status}
+                    </Badge>
+                    {membershipStatus.subscription.cancel_at_period_end && (
+                      <Badge variant="destructive">Canceling</Badge>
+                    )}
+                  </div>
+                  <p className="text-sm text-muted-foreground capitalize">
+                    {membershipStatus.subscription.status === "trialing" ? "7-day free trial" : `${membershipStatus.subscription.billing_cycle} billing`}
+                  </p>
+                </div>
+                <div className="text-right">
+                  {membershipStatus.subscription.status === "trialing" ? (
+                    <>
+                      <p className="text-xl font-bold">R0</p>
+                      <p className="text-xs text-muted-foreground">During trial</p>
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-xl font-bold">
+                        R{membershipStatus.subscription.billing_cycle === "monthly" ? "599" : "5,970"}
+                      </p>
+                      <p className="text-xs text-muted-foreground">
+                        per {membershipStatus.subscription.billing_cycle === "monthly" ? "month" : "year"}
+                      </p>
+                    </>
+                  )}
+                </div>
+              </div>
+              {membershipStatus.subscription.status === "trialing" && (
+                <div className="flex items-center gap-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                  <Calendar className="h-4 w-4 text-blue-600" />
+                  <div className="flex-1">
+                    <p className="text-sm font-medium text-blue-900">
+                      {Math.ceil((new Date(membershipStatus.subscription.current_period_end).getTime() - Date.now()) / (1000 * 60 * 60 * 24))} days remaining in trial
+                    </p>
+                  </div>
+                </div>
+              )}
+              <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center gap-2 text-muted-foreground">
+                  <Calendar className="h-4 w-4" />
+                  <span>
+                    {membershipStatus.subscription.status === "trialing"
+                      ? `Trial ends ${new Date(membershipStatus.subscription.current_period_end).toLocaleDateString()}`
+                      : membershipStatus.subscription.cancel_at_period_end
+                      ? `Expires ${new Date(membershipStatus.subscription.current_period_end).toLocaleDateString()}`
+                      : `Renews ${new Date(membershipStatus.subscription.current_period_end).toLocaleDateString()}`
+                    }
+                  </span>
+                </div>
+                <Button asChild variant="outline" size="sm">
+                  <Link href="/dashboard/subscription">
+                    {membershipStatus.subscription.status === "trialing" ? "Subscribe" : "Manage"}
+                  </Link>
+                </Button>
+              </div>
+            </div>
+          ) : membershipStatus?.purchase ? (
+            <div className="space-y-3">
+              <div className="flex items-center justify-between p-4 border rounded-lg">
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2">
+                    <p className="font-medium">
+                      {membershipStatus.purchase.product_type === "lifetime" ? "Lifetime Access" : "Annual Prepaid"}
+                    </p>
+                    <Badge>Active</Badge>
+                  </div>
+                  <p className="text-sm text-muted-foreground">
+                    {membershipStatus.purchase.product_type === "lifetime" ? "Never expires" : "One-time payment"}
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-xl font-bold">
+                    R{membershipStatus.purchase.product_type === "lifetime" ? "12,999" : "4,478"}
+                  </p>
+                  <p className="text-xs text-muted-foreground">One-time</p>
+                </div>
+              </div>
+              {membershipStatus.purchase.expires_at && (
+                <div className="flex items-center justify-between text-sm">
+                  <div className="flex items-center gap-2 text-muted-foreground">
+                    <Calendar className="h-4 w-4" />
+                    <span>Expires on {new Date(membershipStatus.purchase.expires_at).toLocaleDateString()}</span>
+                  </div>
+                  <Button asChild variant="outline" size="sm">
+                    <Link href="/dashboard/subscription">View Details</Link>
+                  </Button>
+                </div>
+              )}
+              {!membershipStatus.purchase.expires_at && (
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2 p-3 bg-green-50 border border-green-200 rounded-lg flex-1">
+                    <Crown className="h-4 w-4 text-green-600" />
+                    <p className="text-sm text-green-900">You have lifetime access!</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          ) : null}
+        </CardContent>
+      </Card>
 
       <form onSubmit={handleSubmit}>
         <div className="grid gap-6">

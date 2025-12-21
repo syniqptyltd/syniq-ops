@@ -19,15 +19,7 @@ export async function GET() {
       )
     }
 
-    // Check for active subscription
-    const { data: subscription } = await supabase
-      .from('subscriptions')
-      .select('*')
-      .eq('user_id', user.id)
-      .in('status', ['active', 'trialing'])
-      .maybeSingle()
-
-    // Check for active purchase
+    // Check for active purchase first (higher priority)
     const { data: purchase } = await supabase
       .from('purchases')
       .select('*')
@@ -35,9 +27,18 @@ export async function GET() {
       .eq('status', 'active')
       .maybeSingle()
 
+    // Check for active subscription (exclude canceled)
+    // If user has a purchase, we don't return subscription to avoid conflicts
+    const { data: subscription } = purchase ? { data: null } : await supabase
+      .from('subscriptions')
+      .select('*')
+      .eq('user_id', user.id)
+      .in('status', ['active', 'trialing'])
+      .maybeSingle()
+
     const hasAccess = !!(
-      (subscription && new Date(subscription.current_period_end) > new Date()) ||
-      (purchase && (!purchase.expires_at || new Date(purchase.expires_at) > new Date()))
+      (purchase && (!purchase.expires_at || new Date(purchase.expires_at) > new Date())) ||
+      (subscription && new Date(subscription.current_period_end) > new Date())
     )
 
     return NextResponse.json({

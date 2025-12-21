@@ -39,6 +39,12 @@ export async function signUp(email: string, password: string, businessName: stri
     return { error: error.message }
   }
 
+  // Create trial subscription for new user
+  if (data?.user?.id) {
+    const { createTrialSubscription } = await import('./trial')
+    await createTrialSubscription(data.user.id, 'professional')
+  }
+
   // Check if email confirmation is required
   // If user session exists immediately, email confirmation is disabled
   if (data?.session) {

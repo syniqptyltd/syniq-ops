@@ -1,10 +1,30 @@
+"use client"
+
+import { useEffect, useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { getDashboardStats } from "@/lib/supabase/actions"
-import { TrendingUp, TrendingDown, DollarSign, Receipt, Wallet } from "lucide-react"
+import { TrendingUp, TrendingDown, DollarSign, Receipt, Wallet, Loader2 } from "lucide-react"
 import { getAccountingData } from "@/lib/supabase/accounting"
+import { useSubscription } from "@/hooks/use-subscription"
+import { UpgradePrompt } from "@/components/subscription/upgrade-prompt"
 
-export default async function AccountingPage() {
-  const [stats, accountingData] = await Promise.all([getDashboardStats(), getAccountingData()])
+export default function AccountingPage() {
+  const { permissions, loading: subscriptionLoading } = useSubscription()
+  const [stats, setStats] = useState<any>(null)
+  const [accountingData, setAccountingData] = useState<any>(null)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    loadData()
+  }, [])
+
+  const loadData = async () => {
+    setLoading(true)
+    const [statsData, accData] = await Promise.all([getDashboardStats(), getAccountingData()])
+    setStats(statsData)
+    setAccountingData(accData)
+    setLoading(false)
+  }
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-ZA", {
@@ -12,6 +32,30 @@ export default async function AccountingPage() {
       currency: "ZAR",
       minimumFractionDigits: 2,
     }).format(amount)
+  }
+
+  if (loading || subscriptionLoading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+      </div>
+    )
+  }
+
+  if (!permissions.hasProfitLossStatements) {
+    return (
+      <div className="space-y-6">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">Accounting</h1>
+          <p className="text-muted-foreground">Financial overview and profit/loss summary</p>
+        </div>
+        <UpgradePrompt
+          feature="Profit & Loss Statements"
+          requiredPlan="Professional"
+          variant="card"
+        />
+      </div>
+    )
   }
 
   const netProfit = accountingData.totalRevenue - accountingData.totalExpenses
@@ -113,7 +157,7 @@ export default async function AccountingPage() {
               </div>
               {accountingData.expensesByCategory.length > 0 ? (
                 <div className="pl-4 space-y-1 text-sm">
-                  {accountingData.expensesByCategory.map((cat) => (
+                  {accountingData.expensesByCategory.map((cat: any) => (
                     <div key={cat.category} className="flex items-center justify-between">
                       <span className="text-muted-foreground">{cat.category}</span>
                       <span>{formatCurrency(cat.total)}</span>
