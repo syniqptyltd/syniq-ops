@@ -21,7 +21,7 @@ export function Footer() {
             <Link href="/" className="group inline-flex items-center gap-2.5 transition-all hover:scale-105">
               <div className="relative h-9 w-9 overflow-hidden rounded-lg ring-2 ring-primary/20 transition-all group-hover:ring-primary/40 group-hover:shadow-lg group-hover:shadow-primary/20">
                 <Image
-                  src="/LOGO-light.png"
+                  src="/SYNIQ-LOGO.png"
                   alt="Syniq Ops Logo"
                   fill
                   className="object-contain"
@@ -78,6 +78,15 @@ export function Footer() {
           <div>
             <h3 className="mb-3 text-sm font-bold text-foreground">Company</h3>
             <ul className="space-y-2.5 text-sm text-muted-foreground">
+              <li>
+                <Link
+                  href="/about"
+                  className="group inline-flex items-center gap-1.5 transition-colors hover:text-primary"
+                >
+                  <span className="h-1 w-1 rounded-full bg-primary opacity-0 transition-opacity group-hover:opacity-100" />
+                  About Us
+                </Link>
+              </li>
               <li>
                 <a
                   href="mailto:syniq.store@gmail.com"

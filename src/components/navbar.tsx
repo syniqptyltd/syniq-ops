@@ -15,7 +15,7 @@ export function Navbar() {
             <Link href="/" className="group flex items-center gap-2.5 transition-all hover:scale-105">
               <div className="relative h-9 w-9 overflow-hidden rounded-lg ring-2 ring-primary/20 transition-all group-hover:ring-primary/40 group-hover:shadow-lg group-hover:shadow-primary/20">
                 <Image
-                  src="/LOGO-light.png"
+                  src="/SYNIQ-LOGO.png"
                   alt="Syniq Ops Logo"
                   fill
                   className="object-contain"
