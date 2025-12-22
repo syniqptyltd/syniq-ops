@@ -72,7 +72,7 @@ export default function DashboardLayout({
           <Link href="/" className="flex items-center gap-2">
              <div className="relative w-8 h-8">
               <Image 
-                src="/LOGO-light.png" // Image in public folder
+                src="/SYNIQ-LOGO.png" // Image in public folder
                 alt="Syniq Ops Logo"
                 fill
                 className="object-contain"
