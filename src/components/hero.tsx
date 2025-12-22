@@ -70,7 +70,7 @@ export function Hero() {
 
           {/* CTA buttons */}
           <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button size="lg" className="group h-14 bg-gradient-to-r from-primary to-secondary px-8 text-lg font-bold shadow-xl shadow-primary/30 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-primary/40" asChild>
+            <Button size="lg" className="group btn-shimmer h-14 bg-gradient-to-r from-primary to-secondary px-8 text-lg font-bold shadow-xl shadow-primary/30 transition-all hover:scale-105 hover:shadow-2xl hover:shadow-primary/40" asChild>
               <Link href="/pricing">
                 ✨ Get Started Free
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />

@@ -44,7 +44,7 @@ export function Navbar() {
               <Link href="/login">Sign In</Link>
             </Button>
             <Button
-              className="group bg-gradient-to-r from-primary to-secondary font-bold shadow-lg shadow-primary/30 transition-all hover:scale-105 hover:shadow-xl hover:shadow-primary/40"
+              className="group btn-shimmer relative overflow-hidden bg-gradient-to-r from-primary to-secondary font-bold shadow-lg shadow-primary/30 transition-all hover:scale-105 hover:shadow-xl hover:shadow-primary/40"
               asChild
             >
               <Link href="/pricing">

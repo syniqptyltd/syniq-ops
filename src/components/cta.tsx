@@ -55,7 +55,7 @@ export function CTA() {
               </div>
 
               <div className="mt-12">
-                <Button size="lg" className="group h-16 bg-white px-10 text-lg font-bold text-primary shadow-2xl transition-all hover:scale-105 hover:bg-white/95 hover:shadow-white/30" asChild>
+                <Button size="lg" className="group btn-shimmer h-16 bg-white px-10 text-lg font-bold text-primary shadow-2xl transition-all hover:scale-105 hover:bg-white/95 hover:shadow-white/30" asChild>
                   <Link href="/pricing">
                     🚀 Get Started Free
                     <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
