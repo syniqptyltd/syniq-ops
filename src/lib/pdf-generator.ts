@@ -7,6 +7,18 @@ type LineItem = {
   price: number
 }
 
+type BrandingSettings = {
+  primaryColor?: string
+  secondaryColor?: string
+  accentColor?: string
+  font?: string
+  footerText?: string
+  headerStyle?: string
+  showLogo?: boolean
+  logoPosition?: string
+  logoUrl?: string
+}
+
 type InvoiceData = {
   invoiceNumber: string
   clientName: string
@@ -34,27 +46,77 @@ type InvoiceData = {
   businessAddress?: string
   businessVatNumber?: string
   businessRegistrationNumber?: string
+  branding?: BrandingSettings
+}
+
+function hexToRgb(hex: string): [number, number, number] {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  return result
+    ? [parseInt(result[1], 16), parseInt(result[2], 16), parseInt(result[3], 16)]
+    : [79, 70, 229] // Default indigo
 }
 
 export function generateInvoicePDF(data: InvoiceData) {
   const doc = new jsPDF()
 
-  // Colors
-  const primaryColor: [number, number, number] = [79, 70, 229] // Indigo
+  // Get branding settings or use defaults
+  const branding = data.branding || {}
+  const font = branding.font || "helvetica"
+  const headerStyle = branding.headerStyle || "gradient"
+  const footerText = branding.footerText || "Thank you for your business!"
+
+  // Colors - convert hex to RGB
+  const primaryColor = hexToRgb(branding.primaryColor || "#4F46E5")
+  const secondaryColor = hexToRgb(branding.secondaryColor || "#6366F1")
+  const accentColor = hexToRgb(branding.accentColor || "#8B5CF6")
   const darkGray: [number, number, number] = [55, 65, 81]
   const lightGray: [number, number, number] = [156, 163, 175]
 
   // Header
-  doc.setFillColor(...primaryColor)
-  doc.rect(0, 0, 210, 40, "F")
+  if (headerStyle === "gradient") {
+    // Create gradient effect with multiple rectangles
+    doc.setFillColor(...primaryColor)
+    doc.rect(0, 0, 210, 40, "F")
+    doc.setFillColor(...secondaryColor)
+    doc.setGState(new (doc as any).GState({ opacity: 0.3 }))
+    doc.rect(0, 0, 210, 20, "F")
+    doc.setGState(new (doc as any).GState({ opacity: 1 }))
+  } else if (headerStyle === "minimal") {
+    // Minimal header - no background, just border
+    doc.setDrawColor(...primaryColor)
+    doc.setLineWidth(1)
+    doc.line(0, 40, 210, 40)
+  } else {
+    // Solid color header
+    doc.setFillColor(...primaryColor)
+    doc.rect(0, 0, 210, 40, "F")
+  }
 
-  doc.setTextColor(255, 255, 255)
+  // Set text color based on header style
+  if (headerStyle === "minimal") {
+    doc.setTextColor(...primaryColor)
+  } else {
+    doc.setTextColor(255, 255, 255)
+  }
+
   doc.setFontSize(28)
-  doc.setFont("helvetica", "bold")
-  doc.text(data.businessName || "Your Business", 20, 25)
+  doc.setFont(font as any, "bold")
+
+  // Position business name based on logo settings
+  const logoPosition = branding.logoPosition || "left"
+  let businessNameX = 20
+  if (logoPosition === "center") {
+    businessNameX = 105
+  } else if (logoPosition === "right") {
+    businessNameX = 160
+  }
+
+  doc.text(data.businessName || "Your Business", businessNameX, 25, {
+    align: logoPosition === "center" ? "center" : logoPosition === "right" ? "right" : "left"
+  })
 
   doc.setFontSize(10)
-  doc.setFont("helvetica", "normal")
+  doc.setFont(font as any, "normal")
   doc.text("INVOICE", 170, 25)
 
   // Business details
@@ -168,14 +230,16 @@ export function generateInvoicePDF(data: InvoiceData) {
     body: tableData,
     theme: "striped",
     headStyles: {
-      fillColor: primaryColor,
+      fillColor: secondaryColor,
       textColor: [255, 255, 255],
       fontStyle: "bold",
       fontSize: 10,
+      font: font,
     },
     styles: {
       fontSize: 9,
       cellPadding: 5,
+      font: font,
     },
     columnStyles: {
       0: { cellWidth: 80 },
@@ -208,21 +272,21 @@ export function generateInvoicePDF(data: InvoiceData) {
   }
 
   // Total
-  doc.setDrawColor(...primaryColor)
+  doc.setDrawColor(...accentColor)
   doc.setLineWidth(0.5)
   doc.line(totalsX, finalY + 12, 190, finalY + 12)
 
-  doc.setFont("helvetica", "bold")
+  doc.setFont(font as any, "bold")
   doc.setFontSize(12)
-  doc.setTextColor(...primaryColor)
+  doc.setTextColor(...accentColor)
   doc.text("TOTAL:", totalsX, finalY + 20)
   doc.text(`R ${data.total.toFixed(2)}`, 190, finalY + 20, { align: "right" })
 
   // Footer
   doc.setTextColor(...lightGray)
   doc.setFontSize(8)
-  doc.setFont("helvetica", "italic")
-  doc.text("Thank you for your business!", 105, 280, { align: "center" })
+  doc.setFont(font as any, "italic")
+  doc.text(footerText, 105, 280, { align: "center" })
 
   return doc
 }

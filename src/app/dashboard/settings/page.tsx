@@ -7,12 +7,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
-import { Loader2, Building2, User, LogOut } from "lucide-react"
+import { Loader2, Building2, User, LogOut, Brush, ArrowRight } from "lucide-react"
 import { updateProfile, updateOrganization, signOut, getUser } from "@/lib/supabase/actions"
 import { toast } from "sonner"
+import Link from "next/link"
 
 export default function SettingsPage() {
-  toast.success("aved")
   const [isLoadingOrg, setIsLoadingOrg] = useState(false)
   const [isLoadingProfile, setIsLoadingProfile] = useState(false)
   const [isLoadingData, setIsLoadingData] = useState(true)
@@ -237,6 +237,35 @@ export default function SettingsPage() {
               </div>
             </div>
           </form>
+        </CardContent>
+      </Card>
+
+      {/* Invoice Branding */}
+      <Card>
+        <CardHeader>
+          <div className="flex items-center gap-2">
+            <Brush className="h-5 w-5 text-muted-foreground" />
+            <div>
+              <CardTitle>Invoice Branding</CardTitle>
+              <CardDescription>Customize the appearance of your invoices</CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="font-medium">Brand your invoices</p>
+              <p className="text-sm text-muted-foreground">
+                Customize colors, fonts, logo, and styling for your invoices
+              </p>
+            </div>
+            <Link href="/dashboard/settings/branding">
+              <Button variant="outline">
+                Configure
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
+          </div>
         </CardContent>
       </Card>
 

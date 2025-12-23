@@ -60,6 +60,15 @@ type UserProfile = {
   phone?: string
   email?: string
   website?: string
+  invoice_primary_color?: string
+  invoice_secondary_color?: string
+  invoice_accent_color?: string
+  invoice_font?: string
+  invoice_footer_text?: string
+  invoice_header_style?: string
+  invoice_show_logo?: boolean
+  invoice_logo_position?: string
+  logo_url?: string
 }
 
 const statusConfig = {
@@ -152,6 +161,17 @@ export default function InvoicesPage() {
       businessAddress: businessAddress || undefined,
       businessVatNumber: userProfile?.vat_number,
       businessRegistrationNumber: userProfile?.registration_number,
+      branding: {
+        primaryColor: userProfile?.invoice_primary_color,
+        secondaryColor: userProfile?.invoice_secondary_color,
+        accentColor: userProfile?.invoice_accent_color,
+        font: userProfile?.invoice_font,
+        footerText: userProfile?.invoice_footer_text,
+        headerStyle: userProfile?.invoice_header_style,
+        showLogo: userProfile?.invoice_show_logo,
+        logoPosition: userProfile?.invoice_logo_position,
+        logoUrl: userProfile?.logo_url,
+      },
     })
   }
 
@@ -226,6 +246,17 @@ export default function InvoicesPage() {
       businessAddress: businessAddress || undefined,
       businessVatNumber: userProfile?.vat_number,
       businessRegistrationNumber: userProfile?.registration_number,
+      branding: {
+        primaryColor: userProfile?.invoice_primary_color,
+        secondaryColor: userProfile?.invoice_secondary_color,
+        accentColor: userProfile?.invoice_accent_color,
+        font: userProfile?.invoice_font,
+        footerText: userProfile?.invoice_footer_text,
+        headerStyle: userProfile?.invoice_header_style,
+        showLogo: userProfile?.invoice_show_logo,
+        logoPosition: userProfile?.invoice_logo_position,
+        logoUrl: userProfile?.logo_url,
+      },
     })
   }
 

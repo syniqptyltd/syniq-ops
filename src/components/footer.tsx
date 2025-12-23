@@ -150,6 +150,15 @@ export function Footer() {
               </li>
               <li>
                 <Link
+                  href="/legal/refund"
+                  className="group inline-flex items-center gap-1.5 transition-colors hover:text-primary"
+                >
+                  <span className="h-1 w-1 rounded-full bg-primary opacity-0 transition-opacity group-hover:opacity-100" />
+                  Refund Policy
+                </Link>
+              </li>
+              <li>
+                <Link
                   href="/legal/acceptable-use"
                   className="group inline-flex items-center gap-1.5 transition-colors hover:text-primary"
                 >

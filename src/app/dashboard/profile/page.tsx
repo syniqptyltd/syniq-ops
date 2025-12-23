@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Badge } from "@/components/ui/badge"
-import { Loader2, Building2, Save, Crown, Calendar } from "lucide-react"
+import { Loader2, Building2, Save, Crown, Calendar, Brush, ArrowRight } from "lucide-react"
 import { getUserProfile, upsertUserProfile } from "@/lib/supabase/actions"
 import Link from "next/link"
 
@@ -443,6 +443,35 @@ export default function ProfilePage() {
                   onChange={(e) => setFormData({ ...formData, website: e.target.value })}
                   disabled={isSaving}
                 />
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Invoice Branding */}
+          <Card>
+            <CardHeader>
+              <div className="flex items-center gap-2">
+                <Brush className="h-5 w-5 text-muted-foreground" />
+                <div>
+                  <CardTitle>Invoice Branding</CardTitle>
+                  <CardDescription>Customize the appearance of your invoices</CardDescription>
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-medium">Brand your invoices</p>
+                  <p className="text-sm text-muted-foreground">
+                    Customize colors, fonts, logo, and styling for professional invoices
+                  </p>
+                </div>
+                <Link href="/dashboard/settings/branding">
+                  <Button variant="outline">
+                    Configure
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
               </div>
             </CardContent>
           </Card>
