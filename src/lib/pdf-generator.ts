@@ -217,11 +217,11 @@ export function generateInvoicePDF(data: InvoiceData) {
   yPos += 15
   doc.setTextColor(...darkGray)
 
-  const tableData = data.lineItems.map((item) => [
-    item.description,
-    item.quantity.toString(),
-    `R ${item.price.toFixed(2)}`,
-    `R ${(item.quantity * item.price).toFixed(2)}`,
+  const tableData = (data.lineItems || []).map((item) => [
+    item?.description || "Item",
+    (item?.quantity || 0).toString(),
+    `R ${(item?.price || 0).toFixed(2)}`,
+    `R ${((item?.quantity || 0) * (item?.price || 0)).toFixed(2)}`,
   ])
 
   autoTable(doc, {

@@ -4,6 +4,66 @@ import { createServerSupabaseClient } from "./server"
 import { redirect } from "next/navigation"
 import { revalidatePath } from "next/cache"
 
+/**
+ * Generate invoice number in format: INV-YYYYMMDD-XXX
+ * Example: INV-20251223-001
+ */
+export async function generateInvoiceNumber(): Promise<string> {
+  const supabase = await createServerSupabaseClient()
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser()
+
+  if (!user) {
+    // Fallback if no user (shouldn't happen)
+    const date = new Date()
+    const dateStr = date.toISOString().split('T')[0].replace(/-/g, '')
+    return `INV-${dateStr}-001`
+  }
+
+  // Get today's date in YYYYMMDD format
+  const today = new Date()
+  const year = today.getFullYear()
+  const month = String(today.getMonth() + 1).padStart(2, '0')
+  const day = String(today.getDate()).padStart(2, '0')
+  const dateStr = `${year}${month}${day}`
+
+  // Get count of invoices created today by this user
+  const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate())
+  const endOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate() + 1)
+
+  const { data: invoices } = await supabase
+    .from("invoices")
+    .select("invoice_number")
+    .eq("user_id", user.id)
+    .gte("created_at", startOfDay.toISOString())
+    .lt("created_at", endOfDay.toISOString())
+    .order("created_at", { ascending: false })
+
+  // Calculate next sequence number
+  let sequenceNumber = 1
+  if (invoices && invoices.length > 0) {
+    // Find the highest sequence number for today
+    const todayPrefix = `INV-${dateStr}-`
+    const todayInvoices = invoices.filter(inv => inv.invoice_number?.startsWith(todayPrefix))
+    if (todayInvoices.length > 0) {
+      const sequences = todayInvoices.map(inv => {
+        const parts = inv.invoice_number.split('-')
+        return parseInt(parts[2] || '0', 10)
+      }).filter(num => !isNaN(num))
+
+      if (sequences.length > 0) {
+        sequenceNumber = Math.max(...sequences) + 1
+      }
+    }
+  }
+
+  // Format as INV-YYYYMMDD-XXX
+  const sequenceStr = String(sequenceNumber).padStart(3, '0')
+  return `INV-${dateStr}-${sequenceStr}`
+}
+
 export async function signIn(email: string, password: string) {
   const supabase = await createServerSupabaseClient()
 

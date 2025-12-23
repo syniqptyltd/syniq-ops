@@ -121,9 +121,21 @@ export default function InvoicesPage() {
     if (!invoice) return
 
     const client = invoice.clients || clients.find((c) => c.id === invoice.client_id)
-    const lineItems = invoice.line_items || []
 
-    const subtotal = lineItems.reduce((sum: number, item: any) => sum + item.quantity * item.price, 0)
+    // Parse line_items - it's stored as jsonb[] in database
+    // When retrieved, it's an array with a single element that contains the actual items
+    let lineItems: any[] = []
+    if (invoice.line_items && Array.isArray(invoice.line_items)) {
+      if (invoice.line_items.length > 0 && Array.isArray(invoice.line_items[0])) {
+        // First element is the actual array of items
+        lineItems = invoice.line_items[0]
+      } else if (invoice.line_items.length > 0 && typeof invoice.line_items[0] === 'object') {
+        // Already parsed correctly
+        lineItems = invoice.line_items
+      }
+    }
+
+    const subtotal = lineItems.reduce((sum: number, item: any) => sum + (item?.quantity || 0) * (item?.price || 0), 0)
     const vat = subtotal * 0.15
 
     // Format business address

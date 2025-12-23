@@ -1,6 +1,6 @@
 "use server"
 
-import { createInvoice, getUserProfile } from "./supabase/actions"
+import { createInvoice, getUserProfile, generateInvoiceNumber } from "./supabase/actions"
 
 type Job = {
   id: string
@@ -122,8 +122,8 @@ export async function generateInvoiceFromJob({ job, clientName, additionalItems 
     total = subtotal + vat
   }
 
-  // Generate invoice number
-  const invoiceNumber = `INV-${Date.now()}`
+  // Generate invoice number in format INV-YYYYMMDD-XXX
+  const invoiceNumber = await generateInvoiceNumber()
 
   // Calculate due date (30 days from now)
   const dueDate = new Date()

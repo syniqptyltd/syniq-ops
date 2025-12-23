@@ -176,7 +176,8 @@ export function InvoiceModal({ open, onOpenChange, clients, invoice, onSave }: I
         })
       } else {
         // Create new invoice
-        const invoiceNumber = `INV-${Date.now()}`
+        const { generateInvoiceNumber } = await import("@/lib/supabase/actions")
+        const invoiceNumber = await generateInvoiceNumber()
         result = await createInvoice({
           invoice_number: invoiceNumber,
           client_id: formData.clientId,
