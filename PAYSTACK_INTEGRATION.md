@@ -50,8 +50,14 @@ Add to your `.env.local`:
 
 ```env
 # Paystack Configuration
-PAYSTACK_SECRET_KEY=sk_test_your_secret_key
-NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY=pk_test_your_public_key
+# For PRODUCTION (Live keys - charges real money):
+PAYSTACK_SECRET_KEY=sk_live_your_live_secret_key
+NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY=pk_live_your_live_public_key
+
+# For DEVELOPMENT (Test keys - no real charges):
+# PAYSTACK_SECRET_KEY=sk_test_your_test_secret_key
+# NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY=pk_test_your_test_public_key
+
 PAYSTACK_WEBHOOK_SECRET=your_webhook_secret
 
 # Supabase Service Role (for webhooks)
@@ -59,6 +65,13 @@ SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
 ```
 
 **Get Paystack keys from**: https://dashboard.paystack.com/#/settings/developer
+
+**⚠️ IMPORTANT - Live vs Test Keys:**
+- **Test keys** (`sk_test_...` / `pk_test_...`): Use for development. No real money charged.
+- **Live keys** (`sk_live_...` / `pk_live_...`): Use for production. Real payments processed.
+- **Current Status**: ✅ Live keys are configured and active (verified account)
+- Switch between test/live by commenting/uncommenting the appropriate lines
+- Never commit live keys to version control (already in `.gitignore`)
 
 ### 2. Database Migration
 
