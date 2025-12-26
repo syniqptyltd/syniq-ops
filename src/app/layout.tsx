@@ -19,19 +19,8 @@ export const metadata: Metadata = {
   description: "Manage your clients, jobs, and invoices all in one place. Built for South African small businesses.",
   generator: "v0.app",
   icons: {
-    icon: [
-      {
-        url: "/SYNIQ-Favicon.png",
-        sizes: "any",
-      },
-      {
-        url: "/icon.png",
-        sizes: "32x32",
-        type: "image/png",
-      },
-    ],
-    apple: "/apple-icon.png",
-    shortcut: "/favicon.ico",
+    icon: "/SYNIQ-Favicon.png",
+    apple: "/SYNIQ-Favicon.png",
   },
 }
 
