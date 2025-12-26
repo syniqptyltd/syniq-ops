@@ -82,8 +82,49 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'SoftwareApplication',
+    name: 'Syniq Ops',
+    applicationCategory: 'BusinessApplication',
+    operatingSystem: 'Web',
+    offers: {
+      '@type': 'Offer',
+      price: '199',
+      priceCurrency: 'ZAR',
+      priceValidUntil: '2026-12-31',
+    },
+    creator: {
+      '@type': 'Organization',
+      name: 'Syniq (Pty) Ltd',
+      url: 'https://syniqops.com',
+      logo: 'https://syniqops.com/SYNIQ-LOGO.png',
+      email: 'syniq.store@gmail.com',
+      address: {
+        '@type': 'PostalAddress',
+        addressCountry: 'ZA',
+      },
+      areaServed: 'ZA',
+    },
+    description: 'Business operations software for South African service companies. Manage clients, create VAT-compliant invoices, track expenses, and run your business efficiently.',
+    featureList: [
+      'Client Management',
+      'VAT-Compliant Invoicing',
+      'Expense Tracking',
+      'Job Management',
+      'Financial Reports',
+      'Payment Tracking',
+    ],
+  }
+
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={`font-sans antialiased`}>
         {children}
         <CookieConsent />

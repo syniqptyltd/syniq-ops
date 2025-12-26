@@ -3,6 +3,18 @@ import { Hero } from "@/components/hero"
 import { Features } from "@/components/features"
 import { CTA } from "@/components/cta"
 import { Footer } from "@/components/footer"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Syniq Ops - Business Operations Software for Service Companies",
+  description: "Manage clients, create VAT-compliant invoices, track expenses, and run your service business efficiently. Built for South African businesses with full VAT support and automated invoicing.",
+  openGraph: {
+    title: "Syniq Ops - Business Operations Software for Service Companies",
+    description: "Manage clients, create VAT-compliant invoices, track expenses, and run your service business efficiently.",
+    url: "/",
+    type: "website",
+  },
+}
 
 export default function HomePage() {
   return (

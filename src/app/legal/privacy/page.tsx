@@ -3,6 +3,12 @@ import { Footer } from "@/components/footer"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Privacy Policy - Syniq Ops",
+  description: "Learn how Syniq Ops collects, uses, and protects your personal information. Our privacy policy explains data security, your rights, and our commitment to protecting your business data.",
+}
 
 export default function PrivacyPage() {
   return (

@@ -3,6 +3,12 @@ import { Footer } from "@/components/footer"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "POPIA Compliance Notice - Syniq Ops",
+  description: "Our commitment to POPIA compliance in South Africa. Learn about your data subject rights, how we process personal information, and our security measures under the Protection of Personal Information Act.",
+}
 
 export default function PopiaPage() {
   return (

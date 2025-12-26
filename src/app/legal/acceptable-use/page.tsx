@@ -3,6 +3,12 @@ import { Footer } from "@/components/footer"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Acceptable Use Policy - Syniq Ops",
+  description: "Review acceptable use guidelines for Syniq Ops. Understand permitted uses, prohibited activities, and enforcement policies.",
+}
 
 export default function AcceptableUsePage() {
     return (

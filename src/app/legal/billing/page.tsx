@@ -3,6 +3,12 @@ import { Footer } from "@/components/footer"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Billing & Subscription Terms - Syniq Ops",
+  description: "Review our billing terms for Syniq Ops subscriptions. Understand payment processing, cancellations, and subscription management.",
+}
 
 export default function BillingTermsPage() {
     return (

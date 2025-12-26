@@ -3,6 +3,12 @@ import { Footer } from "@/components/footer"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Terms & Conditions - Syniq Ops",
+  description: "Read our terms and conditions for using Syniq Ops business operations software. Learn about your rights, responsibilities, and our service commitments.",
+}
 
 export default function TermsPage() {
   return (

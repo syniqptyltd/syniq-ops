@@ -3,6 +3,12 @@ import { Footer } from "@/components/footer"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "Refund Policy - Syniq Ops",
+  description: "Understand our refund policy for Syniq Ops subscriptions and payments. Learn about eligibility, timelines, and exceptional circumstances for refunds.",
+}
 
 export default function RefundPolicyPage() {
     return (

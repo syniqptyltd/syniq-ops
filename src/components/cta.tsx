@@ -22,7 +22,7 @@ export function CTA() {
               {/* Badge */}
               <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-white/20 px-4 py-2 text-sm font-semibold text-white shadow-lg backdrop-blur-sm">
                 <CheckCircle2 className="h-4 w-4" />
-                Join Hundreds of Businesses
+                Used by Service Businesses Across SA
               </div>
 
               <h2 className="text-balance text-4xl font-bold tracking-tight text-white sm:text-5xl lg:text-6xl">

@@ -42,8 +42,8 @@ export function Hero() {
 
           {/* Subheading */}
           <p className="mt-8 text-pretty text-xl leading-relaxed text-muted-foreground sm:text-2xl">
-            From client management to professional invoicing with detailed cost breakdowns.
-            <span className="font-semibold text-foreground"> Everything you need</span> to manage your operations, track expenses, and grow your business.
+            Track every job, manage client details, and create VAT-compliant invoices with line-by-line breakdowns.
+            <span className="font-semibold text-foreground"> Stop juggling spreadsheets</span> and get back to what you do best.
           </p>
 
           {/* Key benefits with icons */}
