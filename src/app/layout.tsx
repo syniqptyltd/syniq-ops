@@ -15,13 +15,66 @@ const _ibmPlexMono = V0_Font_IBM_Plex_Mono({ subsets: ['latin'], weight: ["100",
 const _lora = V0_Font_Lora({ subsets: ['latin'], weight: ["400","500","600","700"] })
 
 export const metadata: Metadata = {
-  title: "Syniq Ops - Small Business Operations Platform",
-  description: "Manage your clients, jobs, and invoices all in one place. Built for South African small businesses.",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://syniqops.com'),
+  title: {
+    default: "Syniq Ops - Small Business Operations Platform | Client & Invoice Management",
+    template: "%s | Syniq Ops"
+  },
+  description: "Manage your clients, jobs, and invoices all in one place. Built for South African small businesses with VAT compliance, automated invoicing, and expense tracking.",
+  keywords: [
+    "business management",
+    "invoice software",
+    "client management",
+    "South African business",
+    "VAT compliant invoicing",
+    "small business operations",
+    "expense tracking",
+    "job management",
+    "business operations platform",
+    "automated invoicing"
+  ],
+  authors: [{ name: "Syniq Ops" }],
+  creator: "Syniq Ops",
+  publisher: "Syniq Ops",
   generator: "v0.app",
   icons: {
     icon: "/SYNIQ-Favicon.png",
     apple: "/SYNIQ-Favicon.png",
   },
+  openGraph: {
+    type: "website",
+    locale: "en_ZA",
+    url: "/",
+    title: "Syniq Ops - Small Business Operations Platform",
+    description: "Manage your clients, jobs, and invoices all in one place. Built for South African small businesses with VAT compliance.",
+    siteName: "Syniq Ops",
+    images: [{
+      url: "/SYNIQ-LOGO.png",
+      width: 1200,
+      height: 630,
+      alt: "Syniq Ops - Business Operations Platform"
+    }]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Syniq Ops - Small Business Operations Platform",
+    description: "Manage your clients, jobs, and invoices all in one place. Built for South African small businesses.",
+    images: ["/SYNIQ-LOGO.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'your-google-verification-code-here',
+  }
 }
 
 export default function RootLayout({
