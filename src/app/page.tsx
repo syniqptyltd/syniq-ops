@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/hero"
 import { Features } from "@/components/features"
+import { CaseStudies } from "@/components/case-studies"
 import { CTA } from "@/components/cta"
 import { Footer } from "@/components/footer"
 import { Metadata } from "next"
@@ -23,6 +24,7 @@ export default function HomePage() {
       <main className="flex-1">
         <Hero />
         <Features />
+        <CaseStudies />
         <CTA />
       </main>
       <Footer />

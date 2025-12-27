@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
+import { ROICalculator } from "@/components/roi-calculator"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Check, Zap, Shield, Sparkles } from "lucide-react"
@@ -545,6 +546,9 @@ export default function PricingPage() {
             </div>
           </div>
         </section>
+
+        {/* ROI Calculator */}
+        <ROICalculator />
       </main>
       <Footer />
     </div>
