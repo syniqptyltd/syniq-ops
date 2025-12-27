@@ -7,7 +7,7 @@ import { Card, CardContent } from "@/components/ui/card"
 const features = [
   {
     icon: Users,
-    title: "Client Management",
+    title: "Client Management Software",
     description:
       "Keep all your client information organized with billing details, VAT numbers, and complete contact history in one central location.",
     useCase: {
@@ -27,7 +27,7 @@ const features = [
   },
   {
     icon: Briefcase,
-    title: "Job Line Items",
+    title: "Job Line Items & Project Tracking",
     description:
       "Create detailed job breakdowns with separate line items for labor, materials, and services. Give clients complete transparency.",
     useCase: {
@@ -47,9 +47,9 @@ const features = [
   },
   {
     icon: FileText,
-    title: "Professional Invoicing",
+    title: "VAT-Compliant Invoicing",
     description:
-      "Generate VAT-compliant invoices with detailed cost breakdowns. Track payments, manage outstanding balances, and get paid faster.",
+      "Generate VAT-compliant invoices with detailed cost breakdowns. Track payments, manage outstanding balances, and get paid faster with professional invoicing.",
     useCase: {
       scenario: "Monthly Invoicing for Service Business",
       workflow: [
@@ -68,7 +68,7 @@ const features = [
   },
   {
     icon: Receipt,
-    title: "Expense Tracking",
+    title: "Expense Tracking & VAT Claims",
     description:
       "Track all business expenses by category with VAT claimable amounts. Perfect for service businesses with materials and subcontractors.",
     useCase: {
@@ -155,10 +155,10 @@ export function Features() {
             Powerful Features
           </div>
           <h2 className="bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-balance text-4xl font-bold tracking-tight text-transparent sm:text-5xl">
-            Everything you need to run your business
+            Small Business Operations Platform Features
           </h2>
           <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl">
-            Real solutions for South African service businesses. See exactly how each feature saves you time and money.
+            Powerful features designed specifically for South African service businesses. See exactly how client management software, VAT-compliant invoicing, and expense tracking save you time and money.
           </p>
         </div>
 

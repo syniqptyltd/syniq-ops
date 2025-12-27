@@ -31,7 +31,7 @@ export function Hero() {
 
           {/* Main heading with gradient */}
           <h1 className="text-balance text-5xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
-            Run Your Service Business{" "}
+            Small Business Operations Platform to Run Your Service Business{" "}
             <span className="relative inline-block">
               <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
                 Effortlessly
@@ -42,7 +42,7 @@ export function Hero() {
 
           {/* Subheading */}
           <p className="mt-8 text-pretty text-xl leading-relaxed text-muted-foreground sm:text-2xl">
-            Track every job, manage client details, and create VAT-compliant invoices with line-by-line breakdowns.
+            From client management software to professional invoicing with detailed cost breakdowns. Everything you need to manage your operations, track expenses, and grow your business with VAT-compliant invoicing and expense tracking.
             <span className="font-semibold text-foreground"> Stop juggling spreadsheets</span> and get back to what you do best.
           </p>
 
