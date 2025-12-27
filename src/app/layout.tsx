@@ -99,7 +99,7 @@ export default function RootLayout({
       name: 'Syniq (Pty) Ltd',
       url: 'https://syniqops.com',
       logo: 'https://syniqops.com/SYNIQ-LOGO.png',
-      email: 'syniq.store@gmail.com',
+      email: 'info@syniqsolutions.co.za',
       address: {
         '@type': 'PostalAddress',
         addressCountry: 'ZA',

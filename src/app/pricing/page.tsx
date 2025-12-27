@@ -275,7 +275,7 @@ export default function PricingPage() {
                             variant="outline"
                             size="lg"
                           >
-                            <Link href="mailto:syniq.store@gmail.com">{plan.cta}</Link>
+                            <Link href="mailto:sales@syniqsolutions.co.za">{plan.cta}</Link>
                           </Button>
                         ) : (
                           <Button
@@ -540,7 +540,7 @@ export default function PricingPage() {
                 className="border-2 border-white/30 bg-white/10 text-white hover:bg-white/20 backdrop-blur-sm text-lg font-semibold px-8 py-6 h-auto"
                 size="lg"
               >
-                <Link href="mailto:syniq.store@gmail.com">💬 Contact Sales</Link>
+                <Link href="mailto:sales@syniqsolutions.co.za">💬 Contact Sales</Link>
               </Button>
             </div>
           </div>

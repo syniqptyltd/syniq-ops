@@ -91,8 +91,8 @@ export default function RefundPolicyPage() {
                             <h2 className="text-2xl font-semibold text-foreground mb-4">Contact</h2>
                             <p className="text-muted-foreground leading-relaxed">
                                 For refund requests or questions about this policy, contact us at{' '}
-                                <a href="mailto:syniq.store@gmail.com" className="text-primary hover:underline">
-                                    syniq.store@gmail.com
+                                <a href="mailto:accounts@syniqsolutions.co.za" className="text-primary hover:underline">
+                                    accounts@syniqsolutions.co.za
                                 </a>
                             </p>
                         </section>

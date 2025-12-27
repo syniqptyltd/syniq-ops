@@ -76,10 +76,10 @@ export default function CookiePolicyPage() {
                             <p className="text-muted-foreground leading-relaxed">
                                 For cookie‑related questions, contact:{" "}
                                 <a
-                                    href="mailto:syniq.store@gmail.com"
+                                    href="mailto:support@syniqsolutions.co.za"
                                     className="text-primary hover:underline font-medium"
                                 >
-                                    syniq.store@gmail.com
+                                    support@syniqsolutions.co.za
                                 </a>
                             </p>
                         </section>

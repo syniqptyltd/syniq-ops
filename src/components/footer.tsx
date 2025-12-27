@@ -89,7 +89,7 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:syniq.store@gmail.com"
+                  href="mailto:info@syniqsolutions.co.za"
                   className="group inline-flex items-center gap-1.5 transition-colors hover:text-secondary"
                 >
                   <Mail className="h-3.5 w-3.5 opacity-0 transition-opacity group-hover:opacity-100" />

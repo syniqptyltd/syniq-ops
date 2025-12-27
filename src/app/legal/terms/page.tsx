@@ -163,10 +163,10 @@ export default function TermsPage() {
               <p className="text-muted-foreground leading-relaxed">
                 If you have any questions about these Terms & Conditions, please contact us at:{" "}
                 <a
-                  href="mailto:syniq.store@gmail.com"
+                  href="mailto:support@syniqsolutions.co.za"
                   className="text-primary hover:underline font-medium"
                 >
-                  syniq.store@gmail.com
+                  support@syniqsolutions.co.za
                 </a>
               </p>
             </section>

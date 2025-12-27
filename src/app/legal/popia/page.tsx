@@ -56,7 +56,7 @@ export default function PopiaPage() {
               </p>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
                 <li>Company: Syniq (Pty) Ltd</li>
-                <li>Email: syniq.store@gmail.com</li>
+                <li>Email: info@syniqsolutions.co.za</li>
                 <li>Service: Syniq Ops Business Management Platform</li>
               </ul>
             </section>
@@ -199,7 +199,7 @@ export default function PopiaPage() {
                 To exercise any of your rights under POPIA, please contact us at:
               </p>
               <ul className="list-disc list-inside space-y-2 text-muted-foreground">
-                <li>Email: syniq.store@gmail.com</li>
+                <li>Email: support@syniqsolutions.co.za</li>
                 <li>Subject Line: "POPIA Data Subject Request"</li>
               </ul>
               <p className="text-muted-foreground leading-relaxed mt-4">
@@ -225,10 +225,10 @@ export default function PopiaPage() {
                 If you have any questions about this POPIA Compliance Notice or our data practices,
                 please contact us at:{" "}
                 <a
-                  href="mailto:syniq.store@gmail.com"
+                  href="mailto:support@syniqsolutions.co.za"
                   className="text-primary hover:underline font-medium"
                 >
-                  syniq.store@gmail.com
+                  support@syniqsolutions.co.za
                 </a>
               </p>
             </section>
