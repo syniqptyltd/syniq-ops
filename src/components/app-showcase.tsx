@@ -124,6 +124,7 @@ export function AppShowcase() {
                     className="object-cover object-top transition-all duration-300"
                     sizes="(max-width: 1024px) 100vw, 60vw"
                     priority={selectedTab === 0}
+                    unoptimized
                   />
                 </div>
               </div>
