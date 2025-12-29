@@ -118,73 +118,90 @@ export default function ExpensesPage() {
     .reduce((sum, exp) => sum + exp.vat_amount, 0)
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 pb-8">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Expenses</h1>
-          <p className="text-muted-foreground">Track and manage your business expenses</p>
+          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+            Expenses
+          </h1>
+          <p className="text-sm text-muted-foreground mt-2">Track and manage your business expenses</p>
         </div>
-        <Button onClick={handleCreate}>
+        <Button onClick={handleCreate} size="lg" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity shadow-lg">
           <Plus className="mr-2 h-4 w-4" />
           Add Expense
         </Button>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-3">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Expenses</CardTitle>
-            <Receipt className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">R {totalExpenses.toLocaleString()}</div>
-            <p className="text-xs text-muted-foreground">{expenses.length} expenses recorded</p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">VAT Claimable</CardTitle>
-            <Receipt className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">R {totalVatClaimable.toLocaleString()}</div>
-            <p className="text-xs text-muted-foreground">
-              {expenses.filter((e) => e.is_vat_claimable).length} claimable expenses
-            </p>
-          </CardContent>
-        </Card>
-
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">This Month</CardTitle>
-            <Receipt className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              R{" "}
-              {expenses
-                .filter((exp) => {
-                  const expDate = new Date(exp.expense_date)
-                  const now = new Date()
-                  return (
-                    expDate.getMonth() === now.getMonth() && expDate.getFullYear() === now.getFullYear()
-                  )
-                })
-                .reduce((sum, exp) => sum + exp.amount, 0)
-                .toLocaleString()}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <Card className="group relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-card to-muted/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-1">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="rounded-xl p-3 bg-gradient-to-br from-primary/20 to-primary/10">
+                <Receipt className="h-6 w-6 text-primary" />
+              </div>
             </div>
-            <p className="text-xs text-muted-foreground">Current month expenses</p>
+            <div>
+              <p className="text-sm text-muted-foreground mb-1">Total Expenses</p>
+              <p className="text-3xl font-bold tracking-tight">R {totalExpenses.toLocaleString()}</p>
+              <p className="text-xs text-muted-foreground mt-1">{expenses.length} expenses recorded</p>
+            </div>
           </CardContent>
+          <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-primary/10 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
+        </Card>
+
+        <Card className="group relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-card to-muted/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-1">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="rounded-xl p-3 bg-gradient-to-br from-secondary/20 to-secondary/10">
+                <Receipt className="h-6 w-6 text-secondary" />
+              </div>
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground mb-1">VAT Claimable</p>
+              <p className="text-3xl font-bold tracking-tight">R {totalVatClaimable.toLocaleString()}</p>
+              <p className="text-xs text-muted-foreground mt-1">
+                {expenses.filter((e) => e.is_vat_claimable).length} claimable expenses
+              </p>
+            </div>
+          </CardContent>
+          <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-secondary/10 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
+        </Card>
+
+        <Card className="group relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-card to-muted/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-1">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="rounded-xl p-3 bg-gradient-to-br from-amber-500/20 to-amber-500/10">
+                <Receipt className="h-6 w-6 text-amber-600" />
+              </div>
+            </div>
+            <div>
+              <p className="text-sm text-muted-foreground mb-1">This Month</p>
+              <p className="text-3xl font-bold tracking-tight">
+                R{" "}
+                {expenses
+                  .filter((exp) => {
+                    const expDate = new Date(exp.expense_date)
+                    const now = new Date()
+                    return (
+                      expDate.getMonth() === now.getMonth() && expDate.getFullYear() === now.getFullYear()
+                    )
+                  })
+                  .reduce((sum, exp) => sum + exp.amount, 0)
+                  .toLocaleString()}
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">Current month expenses</p>
+            </div>
+          </CardContent>
+          <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-amber-500/10 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
         </Card>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Expense History</CardTitle>
+      <Card className="relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+        <CardHeader className="border-b border-border/40">
+          <CardTitle className="text-xl font-bold">Expense History</CardTitle>
           <CardDescription>View and manage all your business expenses</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-6">
           {isLoading ? (
             <div className="flex items-center justify-center py-8">
               <p className="text-muted-foreground">Loading expenses...</p>

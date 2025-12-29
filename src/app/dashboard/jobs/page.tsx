@@ -164,20 +164,22 @@ export default function JobsPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 pb-8">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Jobs</h1>
-          <p className="text-muted-foreground mt-1">Track and manage your ongoing work</p>
+          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+            Jobs
+          </h1>
+          <p className="text-sm text-muted-foreground mt-2">Track and manage your ongoing work</p>
         </div>
         <div className="flex gap-2">
           <Link href="/dashboard/jobs/kanban">
-            <Button variant="outline">
+            <Button variant="outline" size="lg">
               <LayoutGrid className="mr-2 h-4 w-4" />
               Kanban View
             </Button>
           </Link>
-          <Button onClick={handleCreateJob}>
+          <Button onClick={handleCreateJob} size="lg" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity shadow-lg">
             <Plus className="mr-2 h-4 w-4" />
             Create Job
           </Button>
@@ -185,30 +187,30 @@ export default function JobsPage() {
       </div>
 
       {jobs.length === 0 ? (
-        <Card>
+        <Card className="relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
           <CardContent className="flex flex-col items-center justify-center py-16">
-            <div className="rounded-full bg-muted p-6 mb-4">
-              <Briefcase className="h-12 w-12 text-muted-foreground" />
+            <div className="rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 p-6 mb-4">
+              <Briefcase className="h-12 w-12 text-primary" />
             </div>
             <CardTitle className="mb-2">No jobs yet</CardTitle>
             <CardDescription className="text-center mb-6 max-w-sm">
               Start managing your work by creating your first job. Keep track of deadlines and progress all in one
               place.
             </CardDescription>
-            <Button onClick={handleCreateJob}>
+            <Button onClick={handleCreateJob} className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity">
               <Plus className="mr-2 h-4 w-4" />
               Create Your First Job
             </Button>
           </CardContent>
         </Card>
       ) : (
-        <Card>
-          <CardHeader>
-            <CardTitle>All Jobs</CardTitle>
+        <Card className="relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+          <CardHeader className="border-b border-border/40">
+            <CardTitle className="text-xl font-bold">All Jobs</CardTitle>
             <CardDescription>A list of all your jobs and their current status</CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="rounded-md border">
+          <CardContent className="p-0">
+            <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>

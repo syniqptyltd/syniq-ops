@@ -91,11 +91,13 @@ export default function ClientsPage() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 pb-8">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Clients</h1>
-          <p className="text-muted-foreground mt-1">
+          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+            Clients
+          </h1>
+          <p className="text-sm text-muted-foreground mt-2">
             Manage your client relationships
             {permissions.maxClients !== null && (
               <span className="ml-2 text-sm">
@@ -104,7 +106,12 @@ export default function ClientsPage() {
             )}
           </p>
         </div>
-        <Button onClick={handleAddClient} disabled={!canAddClient}>
+        <Button
+          onClick={handleAddClient}
+          disabled={!canAddClient}
+          size="lg"
+          className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity shadow-lg"
+        >
           <Plus className="mr-2 h-4 w-4" />
           Add Client
         </Button>
@@ -147,29 +154,29 @@ export default function ClientsPage() {
       )}
 
       {clients.length === 0 ? (
-        <Card>
+        <Card className="relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
           <CardContent className="flex flex-col items-center justify-center py-16">
-            <div className="rounded-full bg-muted p-6 mb-4">
-              <Users className="h-12 w-12 text-muted-foreground" />
+            <div className="rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 p-6 mb-4">
+              <Users className="h-12 w-12 text-primary" />
             </div>
             <CardTitle className="mb-2">No clients yet</CardTitle>
             <CardDescription className="text-center mb-6 max-w-sm">
               Get started by adding your first client. Keep track of all your business relationships in one place.
             </CardDescription>
-            <Button onClick={handleAddClient}>
+            <Button onClick={handleAddClient} className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity">
               <Plus className="mr-2 h-4 w-4" />
               Add Your First Client
             </Button>
           </CardContent>
         </Card>
       ) : (
-        <Card>
-          <CardHeader>
-            <CardTitle>All Clients</CardTitle>
+        <Card className="relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+          <CardHeader className="border-b border-border/40">
+            <CardTitle className="text-xl font-bold">All Clients</CardTitle>
             <CardDescription>A list of all your clients and their contact information</CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="rounded-md border">
+          <CardContent className="p-0">
+            <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>
