@@ -12,6 +12,7 @@ const screenshots = [
     description: "Get a comprehensive view of your business with real-time analytics, revenue tracking, and key performance metrics at a glance.",
     image: "/Dashboard.png",
     icon: LayoutDashboard,
+    objectFit: "cover" as const,
   },
   {
     id: "clients",
@@ -19,6 +20,7 @@ const screenshots = [
     description: "Store all client information, VAT numbers, and billing details in one place. Quick access to client history and payment patterns.",
     image: "/Clients.png",
     icon: Users,
+    objectFit: "cover" as const,
   },
   {
     id: "jobs",
@@ -26,6 +28,7 @@ const screenshots = [
     description: "Manage jobs with detailed line items, track progress, and organize work with our intuitive kanban board view.",
     image: "/Jobs.png",
     icon: Briefcase,
+    objectFit: "cover" as const,
   },
   {
     id: "invoices",
@@ -33,6 +36,7 @@ const screenshots = [
     description: "Create professional, SARS-compliant invoices in seconds with automatic VAT calculations and customizable branding.",
     image: "/Invoice.png",
     icon: FileText,
+    objectFit: "contain" as const,
   },
   {
     id: "expenses",
@@ -40,6 +44,7 @@ const screenshots = [
     description: "Track all business expenses with VAT categorization. Never miss a VAT claim again with organized expense management.",
     image: "/Expenses.png",
     icon: Receipt,
+    objectFit: "cover" as const,
   },
   {
     id: "accounting",
@@ -47,6 +52,7 @@ const screenshots = [
     description: "Generate detailed financial reports, VAT summaries, and export data for your accountant with a single click.",
     image: "/Accounting.png",
     icon: Calculator,
+    objectFit: "cover" as const,
   },
 ]
 
@@ -116,12 +122,12 @@ export function AppShowcase() {
 
               {/* Screenshot */}
               <div className="lg:col-span-3 relative bg-gradient-to-br from-muted/30 to-background p-6">
-                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-border/40 shadow-lg">
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-border/40 shadow-lg bg-white">
                   <Image
                     src={screenshots[selectedTab].image}
                     alt={screenshots[selectedTab].title}
                     fill
-                    className="object-cover object-top transition-all duration-300"
+                    className={`${screenshots[selectedTab].objectFit === 'contain' ? 'object-contain' : 'object-cover object-top'} transition-all duration-300`}
                     sizes="(max-width: 1024px) 100vw, 60vw"
                     priority={selectedTab === 0}
                     unoptimized
