@@ -92,125 +92,218 @@ export default async function DashboardPage() {
         </Link>
       </div>
 
-      {/* Stats Cards - Redesigned */}
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
-        {statCards.map((stat, index) => {
-          const Icon = stat.icon
-          return (
-            <Card
-              key={stat.title}
-              className={`group relative overflow-hidden border shadow-sm transition-all hover:shadow-md ${
-                stat.highlight ? 'border-l-4 border-l-primary' : ''
-              }`}
-            >
-              <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
-                  <CardTitle className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
-                    {stat.title}
-                  </CardTitle>
-                  <div className={`rounded-lg p-2 ${stat.iconBg}`}>
-                    <Icon className={`h-4 w-4 ${stat.iconColor}`} />
-                  </div>
+      {/* 3-Column Grid Layout */}
+      <div className="grid gap-6 lg:grid-cols-3">
+        {/* Left Column: Business Analytics */}
+        <div className="space-y-6">
+          {/* Total Clients Card */}
+          <Card className="group relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-1">
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  Total Clients
+                </CardTitle>
+                <div className="rounded-lg p-2 bg-blue-500/10">
+                  <Users className="h-4 w-4 text-blue-600" />
                 </div>
-              </CardHeader>
-              <CardContent className="pb-4">
-                <div className="space-y-2">
-                  <div className="text-2xl font-bold tracking-tight">{stat.value}</div>
-                  {stat.trend && (
-                    <div className="flex items-center gap-1 text-xs">
-                      {stat.trend.isPositive ? (
-                        <ArrowUpRight className="h-3.5 w-3.5 text-emerald-600" />
-                      ) : (
-                        <ArrowDownRight className="h-3.5 w-3.5 text-rose-600" />
-                      )}
-                      <span className={`font-medium ${stat.trend.isPositive ? "text-emerald-600" : "text-rose-600"}`}>
-                        {stat.trend.value}%
-                      </span>
-                      <span className="text-muted-foreground">vs last month</span>
+              </div>
+            </CardHeader>
+            <CardContent className="pb-4">
+              <div className="space-y-2">
+                <div className="text-2xl font-bold tracking-tight">{stats.totalClients}</div>
+                <div className="flex items-center gap-1 text-xs">
+                  <ArrowUpRight className="h-3.5 w-3.5 text-emerald-600" />
+                  <span className="font-medium text-emerald-600">{trends.clients.value}%</span>
+                  <span className="text-muted-foreground">vs last month</span>
+                </div>
+              </div>
+            </CardContent>
+            <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-muted/30 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
+          </Card>
+
+          {/* Active Jobs Card */}
+          <Card className="group relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-1">
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  Active Jobs
+                </CardTitle>
+                <div className="rounded-lg p-2 bg-purple-500/10">
+                  <Briefcase className="h-4 w-4 text-purple-600" />
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="pb-4">
+              <div className="space-y-2">
+                <div className="text-2xl font-bold tracking-tight">{stats.activeJobs}</div>
+                <div className="flex items-center gap-1 text-xs">
+                  <ArrowUpRight className="h-3.5 w-3.5 text-emerald-600" />
+                  <span className="font-medium text-emerald-600">{trends.jobs.value}%</span>
+                  <span className="text-muted-foreground">vs last month</span>
+                </div>
+              </div>
+            </CardContent>
+            <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-muted/30 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
+          </Card>
+
+          {/* Quick Actions Card */}
+          <Card className="group relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)]">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-lg font-semibold">Quick Actions</CardTitle>
+              <CardDescription className="text-sm">Common tasks</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                <Link href="/dashboard/clients" className="group/action">
+                  <Button
+                    variant="outline"
+                    className="w-full justify-start h-auto py-3 px-3 border shadow-sm hover:shadow-md hover:border-primary/50 transition-all"
+                  >
+                    <div className="flex items-center gap-3 w-full">
+                      <div className="rounded-lg bg-blue-500/10 p-2">
+                        <Users className="h-4 w-4 text-blue-600" />
+                      </div>
+                      <div className="text-left">
+                        <div className="font-semibold text-sm">Add New Client</div>
+                        <div className="text-xs text-muted-foreground">Create client profile</div>
+                      </div>
                     </div>
-                  )}
-                  {stat.subtext && (
-                    <p className="text-xs text-muted-foreground">{stat.subtext}</p>
-                  )}
-                </div>
-              </CardContent>
+                  </Button>
+                </Link>
+                <Link href="/dashboard/jobs" className="group/action">
+                  <Button
+                    variant="outline"
+                    className="w-full justify-start h-auto py-3 px-3 border shadow-sm hover:shadow-md hover:border-primary/50 transition-all"
+                  >
+                    <div className="flex items-center gap-3 w-full">
+                      <div className="rounded-lg bg-purple-500/10 p-2">
+                        <Briefcase className="h-4 w-4 text-purple-600" />
+                      </div>
+                      <div className="text-left">
+                        <div className="font-semibold text-sm">Create Job</div>
+                        <div className="text-xs text-muted-foreground">Start new project</div>
+                      </div>
+                    </div>
+                  </Button>
+                </Link>
+                <Link href="/dashboard/invoices" className="group/action">
+                  <Button
+                    variant="outline"
+                    className="w-full justify-start h-auto py-3 px-3 border shadow-sm hover:shadow-md hover:border-primary/50 transition-all"
+                  >
+                    <div className="flex items-center gap-3 w-full">
+                      <div className="rounded-lg bg-orange-500/10 p-2">
+                        <FileText className="h-4 w-4 text-orange-600" />
+                      </div>
+                      <div className="text-left">
+                        <div className="font-semibold text-sm">Send Invoice</div>
+                        <div className="text-xs text-muted-foreground">Generate & send</div>
+                      </div>
+                    </div>
+                  </Button>
+                </Link>
+              </div>
+            </CardContent>
+            <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-muted/30 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
+          </Card>
+        </div>
 
-              {/* Subtle hover gradient */}
-              <div className="absolute inset-0 -z-10 bg-gradient-to-br from-primary/0 to-primary/0 opacity-0 transition-opacity group-hover:from-primary/5 group-hover:to-transparent group-hover:opacity-100" />
-            </Card>
-          )
-        })}
+        {/* Middle Column: Job Tracking & Activity */}
+        <div className="space-y-6">
+          {/* Outstanding Invoices Card */}
+          <Card className="group relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-1">
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  Outstanding Invoices
+                </CardTitle>
+                <div className="rounded-lg p-2 bg-orange-500/10">
+                  <FileText className="h-4 w-4 text-orange-600" />
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="pb-4">
+              <div className="space-y-2">
+                <div className="text-2xl font-bold tracking-tight">{stats.outstandingInvoices}</div>
+                <p className="text-xs text-muted-foreground">{formatCurrency(stats.outstandingAmount)} unpaid</p>
+              </div>
+            </CardContent>
+            <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-muted/30 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
+          </Card>
+
+          {/* Recent Activity */}
+          <Card className="group relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)]">
+            <CardHeader className="pb-4">
+              <CardTitle className="text-lg font-semibold">Recent Activity</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <RecentActivity activities={analytics.recentActivity} />
+            </CardContent>
+            <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-muted/30 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
+          </Card>
+        </div>
+
+        {/* Right Column: Financial Summary */}
+        <div className="space-y-6">
+          {/* Monthly Revenue Card */}
+          <Card className="group relative overflow-hidden rounded-2xl border-0 border-l-4 border-l-primary bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-1">
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  Monthly Revenue
+                </CardTitle>
+                <div className="rounded-lg p-2 bg-green-500/10">
+                  <TrendingUp className="h-4 w-4 text-green-600" />
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="pb-4">
+              <div className="space-y-2">
+                <div className="text-2xl font-bold tracking-tight">{formatCurrency(stats.monthlyRevenue)}</div>
+                <div className="flex items-center gap-1 text-xs">
+                  <ArrowUpRight className="h-3.5 w-3.5 text-emerald-600" />
+                  <span className="font-medium text-emerald-600">{trends.revenue.value}%</span>
+                  <span className="text-muted-foreground">vs last month</span>
+                </div>
+              </div>
+            </CardContent>
+            <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-muted/30 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
+          </Card>
+
+          {/* Monthly Expenses Card */}
+          <Card className="group relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-1">
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between">
+                <CardTitle className="text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                  Monthly Expenses
+                </CardTitle>
+                <div className="rounded-lg p-2 bg-red-500/10">
+                  <Receipt className="h-4 w-4 text-red-600" />
+                </div>
+              </div>
+            </CardHeader>
+            <CardContent className="pb-4">
+              <div className="space-y-2">
+                <div className="text-2xl font-bold tracking-tight">{formatCurrency(stats.monthlyExpenses || 0)}</div>
+                <p className="text-xs text-muted-foreground">Net: {formatCurrency(stats.monthlyRevenue - (stats.monthlyExpenses || 0))}</p>
+              </div>
+            </CardContent>
+            <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-muted/30 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
+          </Card>
+
+          {/* Charts Card */}
+          <Card className="group relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)]">
+            <CardContent className="p-0">
+              <DashboardCharts
+                revenueData={analytics.revenueData}
+                jobsData={analytics.jobsData}
+                invoicesData={analytics.invoicesData}
+              />
+            </CardContent>
+            <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-muted/30 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
+          </Card>
+        </div>
       </div>
-
-      {/* Charts */}
-      <DashboardCharts
-        revenueData={analytics.revenueData}
-        jobsData={analytics.jobsData}
-        invoicesData={analytics.invoicesData}
-      />
-
-      {/* Recent Activity */}
-      <RecentActivity activities={analytics.recentActivity} />
-
-      {/* Quick Actions */}
-      <Card className="border shadow-sm">
-        <CardHeader className="pb-4">
-          <CardTitle className="text-lg font-semibold">Quick Actions</CardTitle>
-          <CardDescription className="text-sm">Common tasks to keep your business running smoothly</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/dashboard/clients" className="group">
-              <Button
-                variant="outline"
-                className="w-full justify-start h-auto py-4 px-4 border shadow-sm hover:shadow-md hover:border-primary/50 transition-all"
-              >
-                <div className="flex items-center gap-3 w-full">
-                  <div className="rounded-lg bg-blue-500/10 p-2.5">
-                    <Users className="h-5 w-5 text-blue-600" />
-                  </div>
-                  <div className="text-left">
-                    <div className="font-semibold text-sm">Add New Client</div>
-                    <div className="text-xs text-muted-foreground">Create client profile</div>
-                  </div>
-                </div>
-              </Button>
-            </Link>
-            <Link href="/dashboard/jobs" className="group">
-              <Button
-                variant="outline"
-                className="w-full justify-start h-auto py-4 px-4 border shadow-sm hover:shadow-md hover:border-primary/50 transition-all"
-              >
-                <div className="flex items-center gap-3 w-full">
-                  <div className="rounded-lg bg-purple-500/10 p-2.5">
-                    <Briefcase className="h-5 w-5 text-purple-600" />
-                  </div>
-                  <div className="text-left">
-                    <div className="font-semibold text-sm">Create Job</div>
-                    <div className="text-xs text-muted-foreground">Start new project</div>
-                  </div>
-                </div>
-              </Button>
-            </Link>
-            <Link href="/dashboard/invoices" className="group">
-              <Button
-                variant="outline"
-                className="w-full justify-start h-auto py-4 px-4 border shadow-sm hover:shadow-md hover:border-primary/50 transition-all"
-              >
-                <div className="flex items-center gap-3 w-full">
-                  <div className="rounded-lg bg-orange-500/10 p-2.5">
-                    <FileText className="h-5 w-5 text-orange-600" />
-                  </div>
-                  <div className="text-left">
-                    <div className="font-semibold text-sm">Send Invoice</div>
-                    <div className="text-xs text-muted-foreground">Generate & send</div>
-                  </div>
-                </div>
-              </Button>
-            </Link>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   )
 }

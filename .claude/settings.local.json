@@ -14,7 +14,13 @@
       "Bash(npx shadcn@latest add:*)",
       "Bash(cat:*)",
       "Bash(grep:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(taskkill /F /PID 41704)",
+      "Bash(taskkill //F //PID 41704)",
+      "Bash(if exist .next rmdir /s /q .next)",
+      "Bash(tasklist:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill //F //PID 34224)"
     ]
   }
 }

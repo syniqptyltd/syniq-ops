@@ -38,27 +38,23 @@ export function CaseStudies() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-muted/30 via-background to-muted/30 py-20 sm:py-32">
+    <section className="relative overflow-hidden bg-muted/30 py-24 sm:py-32">
       {/* Subtle background decoration */}
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_70%_50%,rgb(var(--primary)/.03),transparent_50%)]" />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-muted/30 to-background" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           ref={ref}
-          className="mx-auto max-w-3xl text-center mb-16"
+          className="mx-auto max-w-2xl text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-sm font-semibold text-primary">
-            <Quote className="h-4 w-4" />
-            Customer Stories
-          </div>
-          <h2 className="text-balance text-4xl font-bold tracking-tight text-foreground sm:text-5xl">
-            Trusted by Service Businesses
+          <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4">
+            Trusted by Service Businesses Across South Africa
           </h2>
-          <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground">
-            South African businesses saving time and growing with Syniq Ops
+          <p className="text-pretty text-lg leading-relaxed text-muted-foreground">
+            See how businesses like yours are saving time and growing with Syniq Ops
           </p>
         </motion.div>
 

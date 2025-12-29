@@ -15,7 +15,7 @@ const _ibmPlexMono = V0_Font_IBM_Plex_Mono({ subsets: ['latin'], weight: ["100",
 const _lora = V0_Font_Lora({ subsets: ['latin'], weight: ["400","500","600","700"] })
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://syniqops.com'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://syniqsolutions.co.za'),
   title: {
     default: "Syniq Ops - Small Business Operations Platform | Client & Invoice Management",
     template: "%s | Syniq Ops"
@@ -97,8 +97,8 @@ export default function RootLayout({
     creator: {
       '@type': 'Organization',
       name: 'Syniq (Pty) Ltd',
-      url: 'https://syniqops.com',
-      logo: 'https://syniqops.com/SYNIQ-LOGO.png',
+      url: 'https://syniqsolutions.co.za',
+      logo: 'https://syniqsolutions.co.za/SYNIQ-LOGO.png',
       email: 'info@syniqsolutions.co.za',
       address: {
         '@type': 'PostalAddress',

@@ -1,6 +1,5 @@
 import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/hero"
-import { AppShowcase } from "@/components/app-showcase"
 import { Features } from "@/components/features"
 import { CaseStudies } from "@/components/case-studies"
 import { CTA } from "@/components/cta"
@@ -24,7 +23,6 @@ export default function HomePage() {
       <Navbar />
       <main className="flex-1">
         <Hero />
-        <AppShowcase />
         <Features />
         <CaseStudies />
         <CTA />
