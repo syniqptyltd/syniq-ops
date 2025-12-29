@@ -44,10 +44,12 @@ export default function AccountingPage() {
 
   if (!permissions.hasProfitLossStatements) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-6 pb-8">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Accounting</h1>
-          <p className="text-muted-foreground">Financial overview and profit/loss summary</p>
+          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+            Accounting
+          </h1>
+          <p className="text-sm text-muted-foreground mt-2">Financial overview and profit/loss summary</p>
         </div>
         <UpgradePrompt
           feature="Profit & Loss Statements"
@@ -63,78 +65,100 @@ export default function AccountingPage() {
     accountingData.totalRevenue > 0 ? (netProfit / accountingData.totalRevenue) * 100 : 0
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 pb-8">
       <div>
-        <h1 className="text-3xl font-bold tracking-tight">Accounting</h1>
-        <p className="text-muted-foreground">Financial overview and profit/loss summary</p>
+        <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+          Accounting
+        </h1>
+        <p className="text-sm text-muted-foreground mt-2">Financial overview and profit/loss summary</p>
       </div>
 
       {/* Key Metrics */}
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Revenue</CardTitle>
-            <TrendingUp className="h-4 w-4 text-green-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-green-600">
-              {formatCurrency(accountingData.totalRevenue)}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <Card className="group relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-card to-muted/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-1">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="rounded-xl p-3 bg-gradient-to-br from-emerald-500/20 to-emerald-500/10">
+                <TrendingUp className="h-6 w-6 text-emerald-600" />
+              </div>
             </div>
-            <p className="text-xs text-muted-foreground">
-              {accountingData.paidInvoiceCount} paid invoices
-            </p>
+            <div>
+              <p className="text-sm text-muted-foreground mb-1">Total Revenue</p>
+              <p className="text-3xl font-bold tracking-tight text-emerald-600">
+                {formatCurrency(accountingData.totalRevenue)}
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">
+                {accountingData.paidInvoiceCount} paid invoices
+              </p>
+            </div>
           </CardContent>
+          <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-emerald-500/10 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Expenses</CardTitle>
-            <TrendingDown className="h-4 w-4 text-red-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-red-600">
-              {formatCurrency(accountingData.totalExpenses)}
+        <Card className="group relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-card to-muted/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-1">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="rounded-xl p-3 bg-gradient-to-br from-red-500/20 to-red-500/10">
+                <TrendingDown className="h-6 w-6 text-red-600" />
+              </div>
             </div>
-            <p className="text-xs text-muted-foreground">{accountingData.expenseCount} expenses</p>
+            <div>
+              <p className="text-sm text-muted-foreground mb-1">Total Expenses</p>
+              <p className="text-3xl font-bold tracking-tight text-red-600">
+                {formatCurrency(accountingData.totalExpenses)}
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">{accountingData.expenseCount} expenses</p>
+            </div>
           </CardContent>
+          <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-red-500/10 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
         </Card>
 
-        <Card className="border-primary/20">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Net Profit</CardTitle>
-            <Wallet className="h-4 w-4 text-primary" />
-          </CardHeader>
-          <CardContent>
-            <div className={`text-2xl font-bold ${netProfit >= 0 ? "text-primary" : "text-destructive"}`}>
-              {formatCurrency(netProfit)}
+        <Card className="group relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-card to-muted/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-1">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="rounded-xl p-3 bg-gradient-to-br from-primary/20 to-primary/10">
+                <Wallet className="h-6 w-6 text-primary" />
+              </div>
             </div>
-            <p className="text-xs text-muted-foreground">
-              {profitMargin.toFixed(1)}% profit margin
-            </p>
+            <div>
+              <p className="text-sm text-muted-foreground mb-1">Net Profit</p>
+              <p className={`text-3xl font-bold tracking-tight ${netProfit >= 0 ? "text-primary" : "text-destructive"}`}>
+                {formatCurrency(netProfit)}
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">
+                {profitMargin.toFixed(1)}% profit margin
+              </p>
+            </div>
           </CardContent>
+          <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-primary/10 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Outstanding</CardTitle>
-            <DollarSign className="h-4 w-4 text-orange-600" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-orange-600">
-              {formatCurrency(stats.outstandingAmount)}
+        <Card className="group relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-card to-muted/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-1">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between mb-4">
+              <div className="rounded-xl p-3 bg-gradient-to-br from-amber-500/20 to-amber-500/10">
+                <DollarSign className="h-6 w-6 text-amber-600" />
+              </div>
             </div>
-            <p className="text-xs text-muted-foreground">{stats.outstandingInvoices} unpaid invoices</p>
+            <div>
+              <p className="text-sm text-muted-foreground mb-1">Outstanding</p>
+              <p className="text-3xl font-bold tracking-tight text-amber-600">
+                {formatCurrency(stats.outstandingAmount)}
+              </p>
+              <p className="text-xs text-muted-foreground mt-1">{stats.outstandingInvoices} unpaid invoices</p>
+            </div>
           </CardContent>
+          <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-amber-500/10 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
         </Card>
       </div>
 
       {/* Profit & Loss Statement */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Profit & Loss Statement</CardTitle>
+      <Card className="relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+        <CardHeader className="border-b border-border/40">
+          <CardTitle className="text-xl font-bold">Profit & Loss Statement</CardTitle>
           <CardDescription>Summary of income and expenses</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-6">
           <div className="space-y-4">
             {/* Revenue Section */}
             <div className="space-y-2">
@@ -185,13 +209,13 @@ export default function AccountingPage() {
       </Card>
 
       {/* Monthly Breakdown */}
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <CardHeader>
-            <CardTitle>Current Month</CardTitle>
+      <div className="grid gap-6 md:grid-cols-2">
+        <Card className="relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+          <CardHeader className="border-b border-border/40">
+            <CardTitle className="text-xl font-bold">Current Month</CardTitle>
             <CardDescription>This month's financial summary</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2">
+          <CardContent className="space-y-2 p-6">
             <div className="flex items-center justify-between">
               <span className="text-sm text-muted-foreground">Revenue</span>
               <span className="font-semibold text-green-600">{formatCurrency(stats.monthlyRevenue)}</span>
@@ -217,12 +241,12 @@ export default function AccountingPage() {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>VAT Summary</CardTitle>
+        <Card className="relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+          <CardHeader className="border-b border-border/40">
+            <CardTitle className="text-xl font-bold">VAT Summary</CardTitle>
             <CardDescription>VAT claimable from expenses</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-2">
+          <CardContent className="space-y-2 p-6">
             <div className="flex items-center justify-between">
               <span className="text-sm text-muted-foreground">Total VAT Claimable</span>
               <span className="font-semibold">{formatCurrency(accountingData.totalVatClaimable)}</span>
@@ -241,12 +265,12 @@ export default function AccountingPage() {
       </div>
 
       {/* Quick Stats */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Business Health Indicators</CardTitle>
+      <Card className="relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+        <CardHeader className="border-b border-border/40">
+          <CardTitle className="text-xl font-bold">Business Health Indicators</CardTitle>
           <CardDescription>Key metrics for business performance</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-6">
           <div className="grid gap-4 md:grid-cols-3">
             <div className="space-y-1">
               <p className="text-sm text-muted-foreground">Average Invoice Value</p>
