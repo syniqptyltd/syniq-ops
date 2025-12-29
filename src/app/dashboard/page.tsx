@@ -1,6 +1,6 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Users, Briefcase, FileText, DollarSign, TrendingUp, ArrowUpRight, ArrowDownRight, Receipt } from "lucide-react"
-import { getDashboardStats } from "@/lib/supabase/actions"
+import { getDashboardStats, getUserProfile } from "@/lib/supabase/actions"
 import { getDashboardAnalytics } from "@/lib/supabase/analytics"
 import { DashboardCharts } from "@/components/dashboard-charts"
 import { RecentActivity } from "@/components/recent-activity"
@@ -8,7 +8,11 @@ import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
 export default async function DashboardPage() {
-  const [stats, analytics] = await Promise.all([getDashboardStats(), getDashboardAnalytics()])
+  const [stats, analytics, userProfile] = await Promise.all([
+    getDashboardStats(),
+    getDashboardAnalytics(),
+    getUserProfile(),
+  ])
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-ZA", {
@@ -31,8 +35,10 @@ export default async function DashboardPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-          <p className="text-muted-foreground mt-1">Welcome back! Here's an overview of your business.</p>
+          <h1 className="text-3xl font-bold tracking-tight">
+            {userProfile?.business_name ? `Welcome back, ${userProfile.business_name}!` : "Dashboard"}
+          </h1>
+          <p className="text-muted-foreground mt-1">Here's an overview of your business.</p>
         </div>
         <div className="flex gap-2">
           <Link href="/dashboard/invoices">
