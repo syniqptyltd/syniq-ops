@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from "react"
+import Image from "next/image"
 import { Users, Briefcase, FileText, Receipt, Calculator, TrendingUp, Sparkles, Clock, DollarSign, CheckCircle2, ArrowRight } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -10,6 +11,7 @@ const features = [
     title: "Client Management Software",
     description:
       "Keep all your client information organized with billing details, VAT numbers, and complete contact history in one central location.",
+    screenshot: "/Clients.png",
     useCase: {
       scenario: "HVAC Contractor with 120+ Active Clients",
       workflow: [
@@ -30,6 +32,7 @@ const features = [
     title: "Job Line Items & Project Tracking",
     description:
       "Create detailed job breakdowns with separate line items for labor, materials, and services. Give clients complete transparency.",
+    screenshot: "/Jobs.png",
     useCase: {
       scenario: "Electrical Installation Project",
       workflow: [
@@ -50,6 +53,7 @@ const features = [
     title: "VAT-Compliant Invoicing",
     description:
       "Generate VAT-compliant invoices with detailed cost breakdowns. Track payments, manage outstanding balances, and get paid faster with professional invoicing.",
+    screenshot: "/Invoice.png",
     useCase: {
       scenario: "Monthly Invoicing for Service Business",
       workflow: [
@@ -71,6 +75,7 @@ const features = [
     title: "Expense Tracking & VAT Claims",
     description:
       "Track all business expenses by category with VAT claimable amounts. Perfect for service businesses with materials and subcontractors.",
+    screenshot: "/Expenses.png",
     useCase: {
       scenario: "Plumber Claiming VAT Back on Materials",
       workflow: [
@@ -92,6 +97,7 @@ const features = [
     title: "Financial Accounting",
     description:
       "Built-in profit & loss statements, expense categorization, and financial health indicators to keep your business profitable.",
+    screenshot: "/Accounting.png",
     useCase: {
       scenario: "Quarterly Business Performance Review",
       workflow: [
@@ -113,6 +119,7 @@ const features = [
     title: "Business Analytics",
     description:
       "Visual charts and insights showing revenue trends, expense patterns, and monthly performance to help you make informed decisions.",
+    screenshot: "/Dashboard.png",
     useCase: {
       scenario: "Growing a Maintenance Business",
       workflow: [
@@ -201,6 +208,22 @@ export function Features() {
 
                   {isExpanded && (
                     <div className="mt-6 space-y-6 animate-in fade-in slide-in-from-top-4 duration-500">
+                      {/* Screenshot */}
+                      {feature.screenshot && (
+                        <div className="rounded-lg overflow-hidden border border-border shadow-lg bg-white">
+                          <div className="relative aspect-[16/10] w-full">
+                            <Image
+                              src={feature.screenshot}
+                              alt={feature.title}
+                              fill
+                              className={`${feature.title.includes('Invoicing') ? 'object-contain' : 'object-cover object-top'}`}
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                              unoptimized
+                            />
+                          </div>
+                        </div>
+                      )}
+
                       {/* Use Case Scenario */}
                       <div className="rounded-lg bg-primary/5 p-4 border border-primary/10">
                         <div className="flex items-start gap-3">

@@ -1,63 +1,10 @@
 'use client'
 
-import { useState } from "react"
 import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
-import { LayoutDashboard, FileText, Briefcase, Users, Receipt, Calculator } from "lucide-react"
-
-const screenshots = [
-  {
-    id: "dashboard",
-    title: "Dashboard Overview",
-    description: "Get a comprehensive view of your business with real-time analytics, revenue tracking, and key performance metrics at a glance.",
-    image: "/Dashboard.png",
-    icon: LayoutDashboard,
-    objectFit: "cover" as const,
-  },
-  {
-    id: "clients",
-    title: "Client Management",
-    description: "Store all client information, VAT numbers, and billing details in one place. Quick access to client history and payment patterns.",
-    image: "/Clients.png",
-    icon: Users,
-    objectFit: "cover" as const,
-  },
-  {
-    id: "jobs",
-    title: "Job Tracking",
-    description: "Manage jobs with detailed line items, track progress, and organize work with our intuitive kanban board view.",
-    image: "/Jobs.png",
-    icon: Briefcase,
-    objectFit: "cover" as const,
-  },
-  {
-    id: "invoices",
-    title: "VAT-Compliant Invoicing",
-    description: "Create professional, SARS-compliant invoices in seconds with automatic VAT calculations and customizable branding.",
-    image: "/Invoice.png",
-    icon: FileText,
-    objectFit: "contain" as const,
-  },
-  {
-    id: "expenses",
-    title: "Expense Tracking",
-    description: "Track all business expenses with VAT categorization. Never miss a VAT claim again with organized expense management.",
-    image: "/Expenses.png",
-    icon: Receipt,
-    objectFit: "cover" as const,
-  },
-  {
-    id: "accounting",
-    title: "Accounting Reports",
-    description: "Generate detailed financial reports, VAT summaries, and export data for your accountant with a single click.",
-    image: "/Accounting.png",
-    icon: Calculator,
-    objectFit: "cover" as const,
-  },
-]
+import { LayoutDashboard } from "lucide-react"
 
 export function AppShowcase() {
-  const [selectedTab, setSelectedTab] = useState(0)
 
   return (
     <section className="relative overflow-hidden border-y border-border/40 bg-gradient-to-b from-background via-muted/20 to-background py-16 sm:py-24">
@@ -74,62 +21,53 @@ export function AppShowcase() {
             See Syniq Ops in Action
           </h2>
           <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground sm:text-xl">
-            Explore our intuitive interface designed specifically for South African service businesses. Everything you need to manage your operations in one powerful platform.
+            Explore our intuitive dashboard designed specifically for South African service businesses. Everything you need to manage your operations in one powerful platform.
           </p>
         </div>
 
-        {/* Tab Navigation */}
-        <div className="mb-8 overflow-x-auto pb-2">
-          <div className="flex gap-2 min-w-max mx-auto justify-center">
-            {screenshots.map((screenshot, index) => {
-              const Icon = screenshot.icon
-              return (
-                <button
-                  key={screenshot.id}
-                  onClick={() => setSelectedTab(index)}
-                  className={`group flex items-center gap-2 rounded-lg px-4 py-3 text-sm font-medium transition-all ${
-                    selectedTab === index
-                      ? "bg-primary text-primary-foreground shadow-md"
-                      : "bg-muted/50 text-muted-foreground hover:bg-muted hover:text-foreground"
-                  }`}
-                >
-                  <Icon className="h-4 w-4" />
-                  <span className="hidden sm:inline">{screenshot.title}</span>
-                  <span className="sm:hidden">{screenshot.title.split(" ")[0]}</span>
-                </button>
-              )
-            })}
-          </div>
-        </div>
-
-        {/* Screenshot Display */}
+        {/* Dashboard Screenshot Display */}
         <Card className="overflow-hidden border-2 shadow-2xl">
           <CardContent className="p-0">
             <div className="grid lg:grid-cols-5 gap-0">
               {/* Description Panel */}
               <div className="lg:col-span-2 bg-gradient-to-br from-muted/50 to-background p-8 flex flex-col justify-center">
                 <div className="flex items-center gap-3 mb-4">
-                  {(() => {
-                    const Icon = screenshots[selectedTab].icon
-                    return <Icon className="h-8 w-8 text-primary" />
-                  })()}
-                  <h3 className="text-2xl font-bold">{screenshots[selectedTab].title}</h3>
+                  <LayoutDashboard className="h-8 w-8 text-primary" />
+                  <h3 className="text-2xl font-bold">Dashboard Overview</h3>
                 </div>
-                <p className="text-muted-foreground leading-relaxed">
-                  {screenshots[selectedTab].description}
+                <p className="text-muted-foreground leading-relaxed mb-6">
+                  Get a comprehensive view of your business with real-time analytics, revenue tracking, and key performance metrics at a glance. Monitor your clients, jobs, invoices, and expenses all from one central dashboard.
                 </p>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">✓</span>
+                    <span>Real-time business metrics and KPIs</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">✓</span>
+                    <span>Revenue and expense tracking</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">✓</span>
+                    <span>Outstanding invoices overview</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">✓</span>
+                    <span>Recent activity feed</span>
+                  </li>
+                </ul>
               </div>
 
               {/* Screenshot */}
               <div className="lg:col-span-3 relative bg-gradient-to-br from-muted/30 to-background p-6">
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg border border-border/40 shadow-lg bg-white">
                   <Image
-                    src={screenshots[selectedTab].image}
-                    alt={screenshots[selectedTab].title}
+                    src="/Dashboard.png"
+                    alt="Dashboard Overview"
                     fill
-                    className={`${screenshots[selectedTab].objectFit === 'contain' ? 'object-contain' : 'object-cover object-top'} transition-all duration-300`}
+                    className="object-cover object-top transition-all duration-300"
                     sizes="(max-width: 1024px) 100vw, 60vw"
-                    priority={selectedTab === 0}
+                    priority
                     unoptimized
                   />
                 </div>
