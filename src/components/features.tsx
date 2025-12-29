@@ -1,57 +1,77 @@
 'use client'
 
-import Image from "next/image"
-import { Users, Briefcase, FileText, Receipt, Calculator, TrendingUp, Sparkles, X } from "lucide-react"
+import { Users, Briefcase, FileText, Receipt, Calculator, TrendingUp, CheckCircle2 } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
-import { useRef, useState } from "react"
+import { useRef } from "react"
 
 const features = [
   {
     icon: Users,
     title: "Client Management",
-    description: "Track clients, contacts & history.",
-    screenshot: "/Clients.png",
+    description: "Keep all client information in one place. Track contacts, communication history, and relationship status.",
+    benefits: [
+      "Centralized client database",
+      "Contact history tracking",
+      "Client communication logs"
+    ]
   },
   {
     icon: Briefcase,
     title: "Job Management",
-    description: "Track tasks, assignments & deadlines.",
-    screenshot: "/Jobs.png",
+    description: "Organize and track all your jobs from start to finish. Assign tasks, set deadlines, and monitor progress.",
+    benefits: [
+      "Task assignment & tracking",
+      "Deadline management",
+      "Job status monitoring"
+    ]
   },
   {
     icon: FileText,
     title: "Automated Invoicing",
-    description: "Effortless billing & payments.",
-    screenshot: "/Invoice.png",
+    description: "Create professional VAT-compliant invoices in seconds. Send, track, and get paid faster.",
+    benefits: [
+      "VAT-compliant invoices",
+      "Automated payment reminders",
+      "Online payment integration"
+    ]
   },
   {
     icon: Receipt,
     title: "Expense Tracking",
-    description: "Monitor costs & VAT claims.",
-    screenshot: "/Expenses.png",
+    description: "Monitor all business expenses and maximize your VAT claims with accurate record keeping.",
+    benefits: [
+      "Receipt capture & storage",
+      "VAT claim tracking",
+      "Expense categorization"
+    ]
   },
   {
     icon: Calculator,
     title: "Financial Accounting",
-    description: "P&L statements & insights.",
-    screenshot: "/Accounting.png",
+    description: "Get real-time P&L statements and financial reports to understand your business performance.",
+    benefits: [
+      "Profit & loss statements",
+      "Cash flow tracking",
+      "Financial reporting"
+    ]
   },
   {
     icon: TrendingUp,
     title: "Business Analytics",
-    description: "Actionable insights & ROI.",
-    screenshot: "/Dashboard.png",
+    description: "Make data-driven decisions with actionable insights on revenue, expenses, and business growth.",
+    benefits: [
+      "Revenue analytics",
+      "Performance metrics",
+      "Growth insights"
+    ]
   },
 ]
 
 export function Features() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
-  const [selectedImage, setSelectedImage] = useState<string | null>(null)
-  const [selectedTitle, setSelectedTitle] = useState<string>("")
 
   return (
     <section id="features" className="relative overflow-hidden bg-background py-24 sm:py-32">
@@ -74,7 +94,7 @@ export function Features() {
           </p>
         </motion.div>
 
-        <div className="mt-16 grid gap-12 sm:grid-cols-1 lg:grid-cols-2">
+        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => {
             const Icon = feature.icon
 
@@ -84,98 +104,46 @@ export function Features() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative group/card cursor-zoom-in"
-                onClick={() => {
-                  setSelectedImage(feature.screenshot)
-                  setSelectedTitle(feature.title)
-                }}
+                className="relative group/card"
               >
-                {/* Floating card with depth and zoom */}
-                <Card className="relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-500 hover:shadow-[0_20px_60px_rgb(0,0,0,0.18)] hover:scale-[1.02]">
-                  <CardContent className="p-0">
-                    {/* Content at top - reduced padding */}
-                    <div className="px-6 pt-6 pb-3">
-                      <div className="flex items-center gap-3 mb-2">
-                        {/* Icon */}
-                        <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                          <Icon className="h-5 w-5 text-primary" />
-                        </div>
-
-                        {/* Title */}
-                        <h3 className="text-xl font-bold text-foreground">
-                          {feature.title}
-                        </h3>
-                      </div>
-
-                      {/* Description */}
-                      <p className="text-sm text-muted-foreground pl-[52px]">
-                        {feature.description}
-                      </p>
-                    </div>
-
-                    {/* Screenshot - Much larger, edge-to-edge */}
-                    <div className="relative aspect-[16/9] w-full bg-muted/30">
-                      <Image
-                        src={feature.screenshot}
-                        alt={feature.title}
-                        fill
-                        className={`${feature.title.includes('Invoicing') ? 'object-contain p-6' : 'object-cover object-top'} transition-transform duration-500 group-hover/card:scale-105`}
-                        sizes="(max-width: 768px) 100vw, 50vw"
-                        unoptimized
-                      />
-                      {/* Zoom hint on hover */}
-                      <div className="absolute inset-0 flex items-center justify-center bg-background/80 opacity-0 transition-opacity duration-300 group-hover/card:opacity-100">
-                        <div className="rounded-full bg-primary/90 px-4 py-2 text-sm font-medium text-primary-foreground shadow-lg backdrop-blur-sm">
-                          Click to zoom
-                        </div>
+                {/* Floating card with depth */}
+                <Card className="relative h-full overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-500 hover:shadow-[0_20px_60px_rgb(0,0,0,0.18)] hover:-translate-y-2">
+                  <CardContent className="p-8 flex flex-col h-full">
+                    {/* Icon with gradient background */}
+                    <div className="mb-6">
+                      <div className="inline-flex h-14 w-14 items-center justify-center rounded-xl bg-gradient-to-br from-primary/20 to-secondary/20 transition-all duration-300 group-hover/card:scale-110">
+                        <Icon className="h-7 w-7 text-primary" />
                       </div>
                     </div>
+
+                    {/* Title */}
+                    <h3 className="text-xl font-bold text-foreground mb-3">
+                      {feature.title}
+                    </h3>
+
+                    {/* Description */}
+                    <p className="text-sm leading-relaxed text-muted-foreground mb-6">
+                      {feature.description}
+                    </p>
+
+                    {/* Benefits list */}
+                    <ul className="space-y-2.5 mt-auto">
+                      {feature.benefits.map((benefit, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-sm text-foreground">
+                          <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0 mt-0.5" />
+                          <span>{benefit}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </CardContent>
                 </Card>
 
                 {/* Soft shadow beneath card for floating effect */}
-                <div className="absolute -bottom-6 left-6 right-6 h-12 bg-gradient-to-b from-muted/40 to-transparent blur-2xl opacity-60 transition-opacity duration-300 group-hover/card:opacity-80 -z-10" />
+                <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-muted/30 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover/card:opacity-70 -z-10" />
               </motion.div>
             )
           })}
         </div>
-
-        {/* Image Lightbox Modal */}
-        <Dialog open={!!selectedImage} onOpenChange={(open) => !open && setSelectedImage(null)}>
-          <DialogContent className="max-w-7xl w-[95vw] p-0 overflow-hidden bg-background border-0">
-            <div className="relative w-full">
-              {/* Close button */}
-              <button
-                onClick={() => setSelectedImage(null)}
-                className="absolute top-4 right-4 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-background/80 backdrop-blur-sm shadow-lg transition-all hover:bg-background hover:scale-110"
-                aria-label="Close"
-              >
-                <X className="h-5 w-5 text-foreground" />
-              </button>
-
-              {/* Full-size screenshot */}
-              {selectedImage && (
-                <div className="relative w-full aspect-[16/9] bg-muted">
-                  <Image
-                    src={selectedImage}
-                    alt={selectedTitle}
-                    fill
-                    className="object-contain"
-                    sizes="95vw"
-                    unoptimized
-                  />
-                </div>
-              )}
-
-              {/* Image title */}
-              {selectedTitle && (
-                <div className="px-6 py-4 border-t border-border bg-muted/30">
-                  <h3 className="text-lg font-semibold text-foreground">{selectedTitle}</h3>
-                </div>
-              )}
-            </div>
-          </DialogContent>
-        </Dialog>
       </div>
     </section>
   )
