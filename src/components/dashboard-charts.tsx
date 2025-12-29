@@ -1,6 +1,5 @@
 "use client"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { AreaChart, Area, BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from "recharts"
 
 type RevenueData = {
@@ -31,66 +30,75 @@ export function DashboardCharts({ revenueData, jobsData, invoicesData }: ChartPr
   }
 
   return (
-    <div className="grid gap-4 md:grid-cols-2">
-      {/* Revenue Trend */}
-      <Card className="col-span-2">
-        <CardHeader>
-          <CardTitle>Revenue Trend</CardTitle>
-          <CardDescription>Monthly revenue and expenses over the last 6 months</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ResponsiveContainer width="100%" height={300}>
-            <AreaChart data={revenueData}>
-              <defs>
-                <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor={COLORS.primary} stopOpacity={0.8} />
-                  <stop offset="95%" stopColor={COLORS.primary} stopOpacity={0} />
-                </linearGradient>
-                <linearGradient id="colorExpenses" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor={COLORS.danger} stopOpacity={0.8} />
-                  <stop offset="95%" stopColor={COLORS.danger} stopOpacity={0} />
-                </linearGradient>
-              </defs>
-              <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-              <XAxis dataKey="month" className="text-xs" />
-              <YAxis className="text-xs" />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: "hsl(var(--background))",
-                  border: "1px solid hsl(var(--border))",
-                  borderRadius: "6px",
-                }}
-                formatter={(value: number) => `R ${value.toLocaleString()}`}
-              />
-              <Legend />
-              <Area
-                type="monotone"
-                dataKey="revenue"
-                stroke={COLORS.primary}
-                fillOpacity={1}
-                fill="url(#colorRevenue)"
-                name="Revenue"
-              />
-              <Area
-                type="monotone"
-                dataKey="expenses"
-                stroke={COLORS.danger}
-                fillOpacity={1}
-                fill="url(#colorExpenses)"
-                name="Expenses"
-              />
-            </AreaChart>
-          </ResponsiveContainer>
-        </CardContent>
-      </Card>
+    <div className="p-6">
+      {/* Revenue Trend - Large Chart */}
+      <div className="mb-8">
+        <ResponsiveContainer width="100%" height={350}>
+          <AreaChart data={revenueData}>
+            <defs>
+              <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor={COLORS.primary} stopOpacity={0.3} />
+                <stop offset="95%" stopColor={COLORS.primary} stopOpacity={0.05} />
+              </linearGradient>
+              <linearGradient id="colorExpenses" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="5%" stopColor={COLORS.secondary} stopOpacity={0.3} />
+                <stop offset="95%" stopColor={COLORS.secondary} stopOpacity={0.05} />
+              </linearGradient>
+            </defs>
+            <CartesianGrid strokeDasharray="3 3" className="stroke-muted/30" />
+            <XAxis
+              dataKey="month"
+              className="text-xs"
+              stroke="hsl(var(--muted-foreground))"
+              tickLine={false}
+            />
+            <YAxis
+              className="text-xs"
+              stroke="hsl(var(--muted-foreground))"
+              tickLine={false}
+              tickFormatter={(value) => `R${(value / 1000).toFixed(0)}k`}
+            />
+            <Tooltip
+              contentStyle={{
+                backgroundColor: "hsl(var(--card))",
+                border: "1px solid hsl(var(--border))",
+                borderRadius: "12px",
+                boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
+              }}
+              formatter={(value: number) => `R ${value.toLocaleString()}`}
+              labelStyle={{ fontWeight: 600, marginBottom: "8px" }}
+            />
+            <Legend
+              wrapperStyle={{ paddingTop: "20px" }}
+              iconType="circle"
+            />
+            <Area
+              type="monotone"
+              dataKey="revenue"
+              stroke={COLORS.primary}
+              strokeWidth={3}
+              fillOpacity={1}
+              fill="url(#colorRevenue)"
+              name="Revenue"
+            />
+            <Area
+              type="monotone"
+              dataKey="expenses"
+              stroke={COLORS.secondary}
+              strokeWidth={3}
+              fillOpacity={1}
+              fill="url(#colorExpenses)"
+              name="Expenses"
+            />
+          </AreaChart>
+        </ResponsiveContainer>
+      </div>
 
-      {/* Jobs Status */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Jobs by Status</CardTitle>
-          <CardDescription>Distribution of your current jobs</CardDescription>
-        </CardHeader>
-        <CardContent>
+      {/* Jobs & Invoices - Side by Side */}
+      <div className="grid gap-6 md:grid-cols-2">
+        {/* Jobs Status */}
+        <div>
+          <h3 className="text-sm font-semibold mb-4">Jobs by Status</h3>
           <ResponsiveContainer width="100%" height={250}>
             <PieChart>
               <Pie
@@ -99,38 +107,53 @@ export function DashboardCharts({ revenueData, jobsData, invoicesData }: ChartPr
                 cy="50%"
                 labelLine={false}
                 label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
-                outerRadius={80}
+                outerRadius={90}
                 fill="#8884d8"
                 dataKey="value"
+                strokeWidth={2}
+                stroke="hsl(var(--card))"
               >
                 {jobsData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.color} />
                 ))}
               </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-        </CardContent>
-      </Card>
-
-      {/* Invoice Status */}
-      <Card>
-        <CardHeader>
-          <CardTitle>Invoice Status</CardTitle>
-          <CardDescription>Payment status breakdown</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ResponsiveContainer width="100%" height={250}>
-            <BarChart data={invoicesData}>
-              <CartesianGrid strokeDasharray="3 3" className="stroke-muted" />
-              <XAxis dataKey="name" className="text-xs" />
-              <YAxis className="text-xs" />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "hsl(var(--background))",
+                  backgroundColor: "hsl(var(--card))",
                   border: "1px solid hsl(var(--border))",
-                  borderRadius: "6px",
+                  borderRadius: "12px",
+                  boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
                 }}
+              />
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+
+        {/* Invoice Status */}
+        <div>
+          <h3 className="text-sm font-semibold mb-4">Invoice Status</h3>
+          <ResponsiveContainer width="100%" height={250}>
+            <BarChart data={invoicesData}>
+              <CartesianGrid strokeDasharray="3 3" className="stroke-muted/30" />
+              <XAxis
+                dataKey="name"
+                className="text-xs"
+                stroke="hsl(var(--muted-foreground))"
+                tickLine={false}
+              />
+              <YAxis
+                className="text-xs"
+                stroke="hsl(var(--muted-foreground))"
+                tickLine={false}
+              />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: "hsl(var(--card))",
+                  border: "1px solid hsl(var(--border))",
+                  borderRadius: "12px",
+                  boxShadow: "0 4px 6px -1px rgb(0 0 0 / 0.1)",
+                }}
+                cursor={{ fill: "hsl(var(--muted)/0.2)" }}
               />
               <Bar dataKey="value" radius={[8, 8, 0, 0]}>
                 {invoicesData.map((entry, index) => (
@@ -139,8 +162,8 @@ export function DashboardCharts({ revenueData, jobsData, invoicesData }: ChartPr
               </Bar>
             </BarChart>
           </ResponsiveContainer>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   )
 }

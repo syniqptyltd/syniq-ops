@@ -20,7 +20,10 @@
       "Bash(if exist .next rmdir /s /q .next)",
       "Bash(tasklist:*)",
       "Bash(findstr:*)",
-      "Bash(taskkill //F //PID 34224)"
+      "Bash(taskkill //F //PID 34224)",
+      "Bash(powershell -Command \"if \\(Test-Path .next\\) { Remove-Item -Recurse -Force .next }\")",
+      "Bash(taskkill /F /PID 57852)",
+      "Bash(taskkill //F //PID 57852)"
     ]
   }
 }
