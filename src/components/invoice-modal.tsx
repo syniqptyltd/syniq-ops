@@ -17,7 +17,7 @@ import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Loader2, Plus, Trash2 } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
-import { createInvoice } from "@/lib/supabase/actions"
+import { createInvoice, getUserProfile } from "@/lib/supabase/actions"
 
 type LineItem = {
   id: string
@@ -60,8 +60,18 @@ export function InvoiceModal({ open, onOpenChange, clients, invoice, onSave }: I
   })
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isLoading, setIsLoading] = useState(false)
+  const [isVatRegistered, setIsVatRegistered] = useState(false)
 
   const isEdit = !!invoice?.id
+
+  // Fetch VAT registration status
+  useEffect(() => {
+    const fetchVatStatus = async () => {
+      const userProfile = await getUserProfile()
+      setIsVatRegistered(userProfile?.is_vat_registered || false)
+    }
+    fetchVatStatus()
+  }, [])
 
   // Reset or populate form when modal opens
   useEffect(() => {
@@ -113,7 +123,8 @@ export function InvoiceModal({ open, onOpenChange, clients, invoice, onSave }: I
   }
 
   const calculateVAT = () => {
-    return calculateSubtotal() * 0.15 // 15% VAT for South Africa
+    // Only calculate VAT if business is VAT registered
+    return isVatRegistered ? calculateSubtotal() * 0.15 : 0
   }
 
   const calculateTotal = () => {
@@ -358,7 +369,9 @@ export function InvoiceModal({ open, onOpenChange, clients, invoice, onSave }: I
                     <span>{formatCurrency(calculateSubtotal())}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">VAT (15%):</span>
+                    <span className="text-muted-foreground">
+                      VAT (15%){!isVatRegistered && <span className="ml-1 text-xs">(Not VAT Registered)</span>}:
+                    </span>
                     <span>{formatCurrency(calculateVAT())}</span>
                   </div>
                   <div className="border-t pt-2 flex justify-between font-semibold">

@@ -155,6 +155,10 @@ export async function generateInvoiceFromJob({ job, clientName, additionalItems 
  * Calculate invoice preview without creating it
  */
 export async function calculateInvoicePreview(job: Job) {
+  // Check if business is VAT registered
+  const userProfile = await getUserProfile()
+  const isVatRegistered = userProfile?.is_vat_registered || false
+
   let subtotal = 0
 
   if (job.fixed_price && job.fixed_price > 0) {
@@ -163,7 +167,8 @@ export async function calculateInvoicePreview(job: Job) {
     subtotal = job.hourly_rate * job.hours_worked
   }
 
-  const vat = subtotal * 0.15
+  // Only calculate VAT if business is VAT registered
+  const vat = isVatRegistered ? subtotal * 0.15 : 0
   const total = subtotal + vat
 
   return {
@@ -171,5 +176,6 @@ export async function calculateInvoicePreview(job: Job) {
     vat,
     total,
     hasPrice: subtotal > 0,
+    isVatRegistered,
   }
 }
