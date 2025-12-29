@@ -38,7 +38,7 @@ export function CaseStudies() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-background via-muted/20 to-background py-20 sm:py-32">
+    <section className="relative overflow-hidden bg-gradient-to-b from-muted/30 via-background to-muted/30 py-20 sm:py-32">
       {/* Subtle background decoration */}
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_70%_50%,rgb(var(--primary)/.03),transparent_50%)]" />
 
@@ -69,8 +69,10 @@ export function CaseStudies() {
               initial={{ opacity: 0, y: 30 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="relative"
             >
-              <Card className="group relative h-full overflow-hidden border border-border/40 bg-card shadow-sm transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+              {/* Floating card with depth */}
+              <Card className="group relative h-full overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-2">
                 <CardContent className="p-6 flex flex-col h-full">
                   {/* Stars */}
                   <div className="flex gap-1 mb-4">
@@ -103,10 +105,10 @@ export function CaseStudies() {
                     </div>
                   </div>
                 </CardContent>
-
-                {/* Subtle border glow on hover */}
-                <div className="absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100 ring-1 ring-primary/20" />
               </Card>
+
+              {/* Soft shadow beneath card for floating effect */}
+              <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-muted/30 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
             </motion.div>
           ))}
         </div>
