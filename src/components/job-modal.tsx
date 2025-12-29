@@ -19,7 +19,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Loader2 } from "lucide-react"
-import { createJob, updateJob } from "@/lib/supabase/actions"
+import { createJob, updateJob, getUserProfile } from "@/lib/supabase/actions"
 
 type Job = {
   id?: string
@@ -69,8 +69,18 @@ export function JobModal({ open, onOpenChange, job, clients, onSave }: JobModalP
   })
   const [errors, setErrors] = useState<Partial<Record<keyof Job, string>>>({})
   const [isLoading, setIsLoading] = useState(false)
+  const [isVatRegistered, setIsVatRegistered] = useState(false)
 
   const isEdit = !!job?.id
+
+  // Fetch VAT registration status
+  useEffect(() => {
+    const fetchVatStatus = async () => {
+      const userProfile = await getUserProfile()
+      setIsVatRegistered(userProfile?.is_vat_registered || false)
+    }
+    fetchVatStatus()
+  }, [])
 
   useEffect(() => {
     if (open && job) {
@@ -141,6 +151,11 @@ export function JobModal({ open, onOpenChange, job, clients, onSave }: JobModalP
       baseAmount = formData.hourly_rate * formData.hours_worked
     } else {
       return null
+    }
+
+    // Only calculate VAT if business is VAT registered
+    if (!isVatRegistered) {
+      return { subtotal: baseAmount, vat: 0, total: baseAmount }
     }
 
     if (formData.vat_inclusive) {
@@ -364,10 +379,11 @@ export function JobModal({ open, onOpenChange, job, clients, onSave }: JobModalP
                   id="vat_inclusive"
                   checked={formData.vat_inclusive}
                   onCheckedChange={(checked) => setFormData({ ...formData, vat_inclusive: checked as boolean })}
-                  disabled={isLoading}
+                  disabled={isLoading || !isVatRegistered}
                 />
                 <Label htmlFor="vat_inclusive" className="font-normal cursor-pointer text-sm">
                   Price includes VAT (15%)
+                  {!isVatRegistered && <span className="ml-2 text-xs text-muted-foreground">(Not VAT Registered)</span>}
                 </Label>
               </div>
 
@@ -427,7 +443,9 @@ export function JobModal({ open, onOpenChange, job, clients, onSave }: JobModalP
                     <span className="font-medium">R {preview.subtotal.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-muted-foreground">VAT (15%):</span>
+                    <span className="text-muted-foreground">
+                      VAT (15%){!isVatRegistered && <span className="ml-1 text-xs">(Not Registered)</span>}:
+                    </span>
                     <span className="font-medium">R {preview.vat.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between pt-1 border-t border-border">
