@@ -38,76 +38,21 @@ export function CaseStudies() {
   const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   return (
-    <section className="relative overflow-hidden bg-muted/30 py-24 sm:py-32">
-      {/* Subtle background decoration */}
-      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-muted/30 to-background" />
-
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 to-white py-24 sm:py-32">
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
           ref={ref}
-          className="mx-auto max-w-2xl text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
           transition={{ duration: 0.5 }}
         >
-          <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl mb-4">
-            Trusted by Service Businesses Across South Africa
-          </h2>
-          <p className="text-pretty text-lg leading-relaxed text-muted-foreground">
-            See how businesses like yours are saving time and growing with Syniq Ops
+          <p className="text-2xl sm:text-3xl font-medium text-slate-800 italic mb-6">
+            "Syniq Ops has transformed how we manage our team!"
+          </p>
+          <p className="text-lg text-slate-600">
+            - Jane D., Plumbing Service
           </p>
         </motion.div>
-
-        <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={testimonial.author}
-              initial={{ opacity: 0, y: 30 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="relative"
-            >
-              {/* Floating card with depth */}
-              <Card className="group relative h-full overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-2">
-                <CardContent className="p-6 flex flex-col h-full">
-                  {/* Stars */}
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-                    ))}
-                  </div>
-
-                  {/* Quote */}
-                  <blockquote className="text-sm leading-relaxed text-foreground mb-6 flex-grow">
-                    "{testimonial.quote}"
-                  </blockquote>
-
-                  {/* Metric badge */}
-                  <div className="mb-4">
-                    <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                      {testimonial.metric}
-                    </div>
-                  </div>
-
-                  {/* Author */}
-                  <div className="flex items-center gap-3 pt-4 border-t border-border/40">
-                    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary font-bold">
-                      {testimonial.author.charAt(0)}
-                    </div>
-                    <div>
-                      <p className="font-semibold text-foreground text-sm">{testimonial.author}</p>
-                      <p className="text-xs text-muted-foreground">{testimonial.role}, {testimonial.company}</p>
-                      <p className="text-xs text-muted-foreground">{testimonial.industry}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Soft shadow beneath card for floating effect */}
-              <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-muted/30 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
-            </motion.div>
-          ))}
-        </div>
       </div>
     </section>
   )

@@ -23,7 +23,9 @@
       "Bash(taskkill //F //PID 34224)",
       "Bash(powershell -Command \"if \\(Test-Path .next\\) { Remove-Item -Recurse -Force .next }\")",
       "Bash(taskkill /F /PID 57852)",
-      "Bash(taskkill //F //PID 57852)"
+      "Bash(taskkill //F //PID 57852)",
+      "Bash(timeout /t 5 /nobreak)",
+      "Bash(taskkill:*)"
     ]
   }
 }

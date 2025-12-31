@@ -38,10 +38,10 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              Run Your Service Business{" "}
+              Streamline Your Service Business{" "}
               <span className="relative inline-block">
                 <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
-                  Effortlessly
+                  Operations
                 </span>
                 <motion.span
                   className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-primary to-secondary rounded-full"
@@ -59,7 +59,7 @@ export function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Manage clients, create VAT-compliant invoices, track expenses, and grow your business. Everything you need in one platform.
+              Save time, reduce costs, and grow with Syniq Ops. The all-in-one operations management tool for small service teams.
             </motion.p>
 
             {/* Key benefits with icons */}
@@ -70,9 +70,9 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 0.3 }}
             >
               {[
-                { icon: CheckCircle2, label: "VAT Compliant" },
-                { icon: Zap, label: "Automated Invoicing" },
-                { icon: TrendingUp, label: "Real-Time Analytics" }
+                { icon: CheckCircle2, label: "Automated scheduling" },
+                { icon: Zap, label: "Optimized routes" },
+                { icon: TrendingUp, label: "Real-time reporting" }
               ].map((item, index) => (
                 <motion.div
                   key={item.label}
@@ -97,14 +97,9 @@ export function Hero() {
               <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
                 <Button size="lg" className="group h-12 bg-gradient-to-r from-primary to-secondary px-8 text-base font-semibold shadow-lg shadow-primary/20 transition-all hover:shadow-xl hover:shadow-primary/30" asChild>
                   <Link href="/pricing">
-                    Get Started Free
+                    Start Your Free Trial
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Link>
-                </Button>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                <Button size="lg" variant="ghost" className="h-12 px-8 text-base font-medium" asChild>
-                  <Link href="#features">View Features</Link>
                 </Button>
               </motion.div>
             </motion.div>
