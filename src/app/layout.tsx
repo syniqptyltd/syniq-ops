@@ -44,22 +44,22 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_ZA",
-    url: "/",
+    url: "https://syniqsolutions.co.za",
     title: "Syniq Ops - Small Business Operations Platform",
     description: "Manage your clients, jobs, and invoices all in one place. Built for South African small businesses with VAT compliance.",
     siteName: "Syniq Ops",
     images: [{
-      url: "/SYNIQ-LOGO.png",
-      width: 1200,
-      height: 630,
-      alt: "Syniq Ops - Business Operations Platform"
+      url: "https://syniqsolutions.co.za/SYNIQ-LOGO.png",
+      width: 512,
+      height: 512,
+      alt: "Syniq Ops Logo - Business Operations Platform"
     }]
   },
   twitter: {
     card: "summary_large_image",
     title: "Syniq Ops - Small Business Operations Platform",
     description: "Manage your clients, jobs, and invoices all in one place. Built for South African small businesses.",
-    images: ["/SYNIQ-LOGO.png"],
+    images: ["https://syniqsolutions.co.za/SYNIQ-LOGO.png"],
   },
   robots: {
     index: true,
@@ -82,7 +82,42 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const jsonLd = {
+  // Organization Schema for Google Knowledge Graph
+  const organizationSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Syniq Solutions',
+    alternateName: 'Syniq Ops',
+    url: 'https://syniqsolutions.co.za',
+    logo: {
+      '@type': 'ImageObject',
+      url: 'https://syniqsolutions.co.za/SYNIQ-LOGO.png',
+      width: 512,
+      height: 512,
+    },
+    image: 'https://syniqsolutions.co.za/SYNIQ-LOGO.png',
+    description: 'Business operations software for South African service companies. Manage clients, create VAT-compliant invoices, track expenses, and run your business efficiently.',
+    email: 'support@syniqsolutions.co.za',
+    address: {
+      '@type': 'PostalAddress',
+      addressCountry: 'ZA',
+    },
+    sameAs: [
+      'https://www.facebook.com/syniqsolutions',
+      'https://twitter.com/syniqsolutions',
+      'https://www.linkedin.com/company/syniqsolutions',
+    ],
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'Customer Support',
+      email: 'support@syniqsolutions.co.za',
+      availableLanguage: ['en'],
+      areaServed: 'ZA',
+    },
+  }
+
+  // Software Application Schema
+  const softwareSchema = {
     '@context': 'https://schema.org',
     '@type': 'SoftwareApplication',
     name: 'Syniq Ops',
@@ -96,15 +131,9 @@ export default function RootLayout({
     },
     creator: {
       '@type': 'Organization',
-      name: 'Syniq (Pty) Ltd',
+      name: 'Syniq Solutions',
       url: 'https://syniqsolutions.co.za',
       logo: 'https://syniqsolutions.co.za/SYNIQ-LOGO.png',
-      email: 'info@syniqsolutions.co.za',
-      address: {
-        '@type': 'PostalAddress',
-        addressCountry: 'ZA',
-      },
-      areaServed: 'ZA',
     },
     description: 'Business operations software for South African service companies. Manage clients, create VAT-compliant invoices, track expenses, and run your business efficiently.',
     featureList: [
@@ -122,7 +151,11 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareSchema) }}
         />
       </head>
       <body className={`font-sans antialiased`}>

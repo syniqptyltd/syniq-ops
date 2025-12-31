@@ -1,7 +1,6 @@
 import { Navbar } from "@/components/navbar"
 import { Hero } from "@/components/hero"
 import { Features } from "@/components/features"
-import { DetailedFeatures } from "@/components/detailed-features"
 import { CaseStudies } from "@/components/case-studies"
 import { CTA } from "@/components/cta"
 import { Footer } from "@/components/footer"
@@ -25,7 +24,6 @@ export default function HomePage() {
       <main className="flex-1">
         <Hero />
         <Features />
-        <DetailedFeatures />
         <CaseStudies />
         <CTA />
       </main>
