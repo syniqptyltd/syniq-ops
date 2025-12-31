@@ -4,7 +4,7 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Mail, MessageCircle } from "lucide-react"
+import { Mail, MessageCircle, CheckCircle2, AlertCircle } from "lucide-react"
 import { motion } from "framer-motion"
 import { useState } from "react"
 
@@ -15,11 +15,42 @@ export default function ContactPage() {
     subject: 'General Inquiry',
     message: ''
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle')
+  const [errorMessage, setErrorMessage] = useState('')
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // Handle form submission
-    console.log('Form submitted:', formData)
+    setIsSubmitting(true)
+    setSubmitStatus('idle')
+    setErrorMessage('')
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+
+      if (!response.ok) {
+        throw new Error('Failed to send message')
+      }
+
+      setSubmitStatus('success')
+      setFormData({
+        fullName: '',
+        workEmail: '',
+        subject: 'General Inquiry',
+        message: ''
+      })
+    } catch (error) {
+      setSubmitStatus('error')
+      setErrorMessage('Failed to send message. Please try again or contact us directly at support@syniqsolutions.co.za')
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -164,12 +195,41 @@ export default function ContactPage() {
                       />
                     </div>
 
+                    {/* Success Message */}
+                    {submitStatus === 'success' && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex items-center gap-3 p-4 bg-teal-50 border-2 border-teal-200 rounded-lg"
+                      >
+                        <CheckCircle2 className="h-5 w-5 text-teal-600 flex-shrink-0" />
+                        <p className="text-sm font-medium text-teal-700">
+                          Message sent successfully! We'll get back to you soon.
+                        </p>
+                      </motion.div>
+                    )}
+
+                    {/* Error Message */}
+                    {submitStatus === 'error' && (
+                      <motion.div
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="flex items-start gap-3 p-4 bg-red-50 border-2 border-red-200 rounded-lg"
+                      >
+                        <AlertCircle className="h-5 w-5 text-red-600 flex-shrink-0 mt-0.5" />
+                        <p className="text-sm font-medium text-red-700">
+                          {errorMessage}
+                        </p>
+                      </motion.div>
+                    )}
+
                     {/* Submit Button */}
                     <Button
                       type="submit"
-                      className="w-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-bold py-3 rounded-lg shadow-lg transition-all hover:shadow-xl"
+                      disabled={isSubmitting}
+                      className="w-full bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white font-bold py-3 rounded-lg shadow-lg transition-all hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed"
                     >
-                      Send Message
+                      {isSubmitting ? 'Sending...' : 'Send Message'}
                     </Button>
 
                     <p className="text-sm text-slate-500 text-center">
