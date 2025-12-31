@@ -4,7 +4,7 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Mail, Phone, MapPin } from "lucide-react"
+import { Mail, MessageCircle } from "lucide-react"
 import { motion } from "framer-motion"
 import { useState } from "react"
 
@@ -62,25 +62,21 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* Phone */}
+                {/* WhatsApp */}
                 <div className="flex items-start gap-4">
                   <div className="flex-shrink-0 w-14 h-14 bg-teal-100 rounded-2xl flex items-center justify-center">
-                    <Phone className="h-7 w-7 text-teal-600" />
+                    <MessageCircle className="h-7 w-7 text-teal-600" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-1">Call Us</h3>
-                    <p className="text-slate-600">+1 (888) 555-0192 (Mon-Fri, 9am-6pm ET)</p>
-                  </div>
-                </div>
-
-                {/* Location */}
-                <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-14 h-14 bg-teal-100 rounded-2xl flex items-center justify-center">
-                    <MapPin className="h-7 w-7 text-teal-600" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-slate-900 mb-1">Visit Us</h3>
-                    <p className="text-slate-600">123 Tech Hub Blvd, Suite 400, Austin, TX 78701</p>
+                    <h3 className="text-xl font-bold text-slate-900 mb-1">WhatsApp Us</h3>
+                    <a
+                      href="https://wa.me/27609931134"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-slate-600 hover:text-teal-600 transition-colors"
+                    >
+                      +27 60 993 1134
+                    </a>
                   </div>
                 </div>
               </div>

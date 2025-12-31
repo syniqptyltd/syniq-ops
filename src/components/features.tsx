@@ -3,7 +3,8 @@
 import { motion } from "framer-motion"
 import { useInView } from "framer-motion"
 import { useRef } from "react"
-import { CheckCircle2, Clock, DollarSign, Calendar, FileText, BarChart3, Zap, TrendingUp, Users } from "lucide-react"
+import { CheckCircle2, DollarSign, FileText, BarChart3, Zap, TrendingUp, Calendar } from "lucide-react"
+import Image from "next/image"
 
 export function Features() {
   const ref1 = useRef(null)
@@ -60,32 +61,14 @@ export function Features() {
               animate={isInView1 ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-white shadow-2xl">
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-400 via-teal-400 to-blue-500 opacity-10" />
-                <div className="relative h-full flex items-center justify-center p-8">
-                  <div className="grid grid-cols-2 gap-4 w-full max-w-md">
-                    {/* Icon grid representing scheduling/automation */}
-                    {[
-                      { icon: Calendar, label: "Schedule", color: "bg-blue-500" },
-                      { icon: FileText, label: "Tasks", color: "bg-pink-500" },
-                      { icon: Clock, label: "Track", color: "bg-teal-500" },
-                      { icon: CheckCircle2, label: "Complete", color: "bg-purple-500" }
-                    ].map((item, idx) => (
-                      <motion.div
-                        key={idx}
-                        className="flex flex-col items-center justify-center p-6 rounded-xl bg-white shadow-lg"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={isInView1 ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-                        transition={{ duration: 0.4, delay: 0.4 + idx * 0.1 }}
-                      >
-                        <div className={`${item.color} p-3 rounded-full mb-2`}>
-                          <item.icon className="h-6 w-6 text-white" />
-                        </div>
-                        <span className="text-xs font-medium text-slate-600">{item.label}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/Mockup 1.png"
+                  alt="Admin Automation Dashboard"
+                  fill
+                  className="object-contain"
+                  priority
+                />
               </div>
             </motion.div>
           </div>
@@ -103,35 +86,13 @@ export function Features() {
               animate={isInView2 ? { opacity: 1, x: 0 } : { opacity: 0, x: -50 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-pink-50 to-rose-100 shadow-2xl p-8">
-                <div className="h-full flex items-center justify-center">
-                  <div className="bg-white rounded-xl shadow-xl p-6 w-full max-w-md">
-                    {/* Dashboard mockup */}
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between">
-                        <h3 className="text-sm font-bold text-slate-700">Financial Overview</h3>
-                        <BarChart3 className="h-5 w-5 text-teal-500" />
-                      </div>
-                      {/* Chart bars */}
-                      <div className="space-y-2">
-                        <div className="h-3 bg-gradient-to-r from-pink-400 to-pink-500 rounded-full w-3/4"></div>
-                        <div className="h-3 bg-gradient-to-r from-teal-400 to-teal-500 rounded-full w-full"></div>
-                        <div className="h-3 bg-gradient-to-r from-purple-400 to-purple-500 rounded-full w-1/2"></div>
-                      </div>
-                      {/* Metrics */}
-                      <div className="grid grid-cols-2 gap-3 mt-6">
-                        <div className="bg-teal-50 rounded-lg p-3">
-                          <div className="text-xs text-teal-700 font-medium">Revenue</div>
-                          <div className="text-lg font-bold text-teal-900">R45.2k</div>
-                        </div>
-                        <div className="bg-pink-50 rounded-lg p-3">
-                          <div className="text-xs text-pink-700 font-medium">Expenses</div>
-                          <div className="text-lg font-bold text-pink-900">R12.8k</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/Mockup 2.png"
+                  alt="Smart Accounting Dashboard"
+                  fill
+                  className="object-contain"
+                />
               </div>
             </motion.div>
 
@@ -218,40 +179,13 @@ export function Features() {
               animate={isInView3 ? { opacity: 1, x: 0 } : { opacity: 0, x: 50 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-gradient-to-br from-teal-50 to-cyan-100 shadow-2xl p-8">
-                <div className="h-full flex items-center justify-center">
-                  {/* Invoice mockup */}
-                  <div className="bg-gradient-to-br from-slate-50 to-white border-2 border-slate-200 rounded-xl shadow-lg p-6 w-full max-w-sm">
-                    <div className="flex items-center justify-between mb-6">
-                      <div>
-                        <h3 className="text-lg font-bold text-slate-900">Invoice</h3>
-                        <p className="text-xs text-slate-500">#INV-2024-001</p>
-                      </div>
-                      <div className="bg-teal-500 text-white px-3 py-1 rounded-full text-xs font-semibold">
-                        PAID
-                      </div>
-                    </div>
-                    {/* Invoice lines */}
-                    <div className="space-y-3 mb-6">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-slate-600">Service</span>
-                        <span className="font-medium text-slate-900">R2,500</span>
-                      </div>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-slate-600">Materials</span>
-                        <span className="font-medium text-slate-900">R850</span>
-                      </div>
-                      <div className="border-t border-slate-200 pt-3 flex justify-between">
-                        <span className="font-bold text-slate-900">Total</span>
-                        <span className="font-bold text-teal-600 text-lg">R3,350</span>
-                      </div>
-                    </div>
-                    {/* Payment button mockup */}
-                    <div className="bg-gradient-to-r from-teal-500 to-cyan-500 text-white text-center py-3 rounded-lg font-semibold text-sm shadow-md">
-                      Pay Now
-                    </div>
-                  </div>
-                </div>
+              <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/Mockup 3.png"
+                  alt="Invoicing Dashboard"
+                  fill
+                  className="object-contain"
+                />
               </div>
             </motion.div>
           </div>
