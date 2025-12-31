@@ -162,31 +162,31 @@ export default function PricingPage() {
       <Navbar />
       <main className="flex-1">
         {/* Header with gradient background */}
-        <section className="relative overflow-hidden border-b bg-gradient-to-br from-primary/5 via-background to-accent/30 py-24 sm:py-32">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#d5dde5_1px,transparent_1px),linear-gradient(to_bottom,#d5dde5_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
+        <section className="relative overflow-hidden border-b bg-gradient-to-br from-slate-50 via-white to-cyan-50/30 py-24 sm:py-32">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(20,184,166,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(20,184,166,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000_70%,transparent_110%)]" />
           <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center">
-              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-accent px-4 py-1.5 text-sm font-medium text-accent-foreground shadow-sm">
+              <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-teal-100 to-cyan-100 px-4 py-1.5 text-sm font-medium text-teal-700 shadow-sm">
                 <Sparkles className="h-4 w-4" />
                 Simple, transparent pricing
               </div>
-              <h1 className="bg-gradient-to-br from-primary via-foreground to-secondary bg-clip-text text-5xl font-bold tracking-tight text-transparent sm:text-6xl">
+              <h1 className="bg-gradient-to-br from-teal-600 via-slate-900 to-cyan-600 bg-clip-text text-5xl font-bold tracking-tight text-transparent sm:text-6xl">
                 Choose Your Plan
               </h1>
-              <p className="mt-6 text-xl leading-relaxed text-muted-foreground">
+              <p className="mt-6 text-xl leading-relaxed text-slate-600">
                 Everything you need to manage your business efficiently.
                 <br />
                 All prices include VAT. Cancel anytime.
               </p>
 
               {/* Billing Toggle */}
-              <div className="mt-10 inline-flex items-center gap-1.5 rounded-xl border-2 border-primary/20 bg-card p-1.5 shadow-lg">
+              <div className="mt-10 inline-flex items-center gap-1.5 rounded-xl border-2 border-teal-200 bg-white p-1.5 shadow-lg">
                 <button
                   onClick={() => setIsYearly(false)}
                   className={`rounded-lg px-6 py-2.5 text-sm font-semibold transition-all duration-300 ${
                     !isYearly
-                      ? "bg-primary text-primary-foreground shadow-md"
-                      : "text-muted-foreground hover:text-foreground"
+                      ? "bg-teal-600 text-white shadow-md"
+                      : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   Monthly
@@ -195,8 +195,8 @@ export default function PricingPage() {
                   onClick={() => setIsYearly(true)}
                   className={`rounded-lg px-6 py-2.5 text-sm font-semibold transition-all duration-300 ${
                     isYearly
-                      ? "bg-gradient-to-r from-primary to-secondary text-white shadow-md"
-                      : "text-muted-foreground hover:text-foreground"
+                      ? "bg-gradient-to-r from-teal-500 to-cyan-500 text-white shadow-md"
+                      : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
                   Annual
@@ -220,36 +220,36 @@ export default function PricingPage() {
                     key={plan.name}
                     className={`group relative flex flex-col border-2 transition-all duration-300 hover:-translate-y-1 ${
                       plan.popular
-                        ? "border-primary/50 bg-gradient-to-br from-primary/5 via-card to-accent/10 shadow-xl shadow-primary/10"
-                        : "border-border bg-card shadow-lg hover:border-primary/30 hover:shadow-xl"
+                        ? "border-teal-200 bg-gradient-to-br from-teal-50 via-white to-cyan-50 shadow-xl shadow-teal-500/10"
+                        : "border-slate-200 bg-white shadow-lg hover:border-teal-200 hover:shadow-xl"
                     }`}
                   >
                     {plan.popular && (
                       <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-                        <div className="flex items-center gap-1.5 rounded-full bg-gradient-to-r from-primary to-secondary px-4 py-1.5 text-xs font-bold text-white shadow-lg">
+                        <div className="flex items-center gap-1.5 rounded-full bg-gradient-to-r from-teal-500 to-cyan-500 px-4 py-1.5 text-xs font-bold text-white shadow-lg">
                           ⭐ Most Popular
                         </div>
                       </div>
                     )}
 
-                    <div className={`h-2 overflow-hidden rounded-t-lg ${plan.popular ? "bg-gradient-to-r from-primary via-secondary to-primary" : "bg-gradient-to-r from-primary/20 to-secondary/20"}`} />
+                    <div className={`h-2 overflow-hidden rounded-t-lg ${plan.popular ? "bg-gradient-to-r from-teal-500 via-cyan-500 to-teal-500" : "bg-gradient-to-r from-teal-200 to-cyan-200"}`} />
 
                     <CardHeader className="space-y-6 p-8 pb-6">
                       <div>
-                        <h3 className="text-2xl font-bold text-foreground">{plan.name}</h3>
-                        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{plan.description}</p>
+                        <h3 className="text-2xl font-bold text-slate-900">{plan.name}</h3>
+                        <p className="mt-3 text-sm leading-relaxed text-slate-600">{plan.description}</p>
                       </div>
                       <div className="pt-2">
                         <div className="flex items-baseline gap-2">
-                          <span className="text-5xl font-bold bg-gradient-to-br from-primary to-secondary bg-clip-text text-transparent">
+                          <span className="text-5xl font-bold bg-gradient-to-br from-teal-600 to-cyan-600 bg-clip-text text-transparent">
                             R{formatPrice(displayPrice)}
                           </span>
-                          <span className="text-base font-medium text-muted-foreground">
+                          <span className="text-base font-medium text-slate-600">
                             {isYearly ? "/year" : "/mo"}
                           </span>
                         </div>
                         {isYearly && (
-                          <p className="mt-2 text-sm font-medium text-secondary">
+                          <p className="mt-2 text-sm font-medium text-cyan-600">
                             💰 R{pricePerMonth}/month • Save 17%
                           </p>
                         )}
@@ -260,10 +260,10 @@ export default function PricingPage() {
                       <ul className="flex-1 space-y-4">
                         {plan.features.map((feature) => (
                           <li key={feature} className="flex items-start gap-3">
-                            <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10">
-                              <Check className="h-3.5 w-3.5 text-primary" />
+                            <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal-100">
+                              <Check className="h-3.5 w-3.5 text-teal-600" />
                             </div>
-                            <span className="text-sm leading-relaxed text-muted-foreground">{feature}</span>
+                            <span className="text-sm leading-relaxed text-slate-600">{feature}</span>
                           </li>
                         ))}
                       </ul>
@@ -272,7 +272,7 @@ export default function PricingPage() {
                         {plan.name === "Enterprise" ? (
                           <Button
                             asChild
-                            className="w-full border-2 border-primary/20 bg-card text-foreground hover:border-primary hover:bg-primary/5"
+                            className="w-full border-2 border-teal-200 bg-white text-slate-900 hover:border-teal-400 hover:bg-teal-50"
                             variant="outline"
                             size="lg"
                           >
@@ -282,8 +282,8 @@ export default function PricingPage() {
                           <Button
                             className={`w-full text-base font-semibold shadow-md transition-all duration-300 ${
                               plan.popular
-                                ? "bg-gradient-to-r from-primary to-secondary hover:shadow-lg hover:shadow-primary/30"
-                                : "bg-primary hover:bg-primary/90 hover:shadow-lg"
+                                ? "bg-gradient-to-r from-teal-500 to-cyan-500 hover:shadow-lg hover:shadow-teal-500/30"
+                                : "bg-teal-600 hover:bg-teal-700 hover:shadow-lg"
                             }`}
                             size="lg"
                             onClick={() => handlePlanClick(plan.name, isYearly)}
@@ -302,18 +302,18 @@ export default function PricingPage() {
         </section>
 
         {/* One-Time Payment Options */}
-        <section className="relative overflow-hidden border-t bg-gradient-to-br from-accent/20 via-background to-primary/5 pb-24 pt-32">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(0,102,255,0.05),transparent_50%),radial-gradient(circle_at_70%_50%,rgba(255,140,66,0.05),transparent_50%)]" />
+        <section className="relative overflow-hidden border-t bg-gradient-to-br from-cyan-50/50 via-white to-teal-50/30 pb-24 pt-32">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(20,184,166,0.08),transparent_50%),radial-gradient(circle_at_70%_50%,rgba(6,182,212,0.08),transparent_50%)]" />
           <div className="relative mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-3xl text-center">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-secondary/10 to-secondary/5 px-4 py-1.5 text-sm font-semibold text-secondary">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-100 to-teal-100 px-4 py-1.5 text-sm font-semibold text-cyan-700">
                 <Sparkles className="h-4 w-4" />
                 Best Value
               </div>
-              <h2 className="bg-gradient-to-br from-foreground via-primary to-secondary bg-clip-text text-4xl font-bold tracking-tight text-transparent">
+              <h2 className="bg-gradient-to-br from-slate-900 via-teal-600 to-cyan-600 bg-clip-text text-4xl font-bold tracking-tight text-transparent">
                 One-Time Payment Options
               </h2>
-              <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+              <p className="mt-4 text-lg leading-relaxed text-slate-600">
                 Pay once and own it forever. No subscriptions, no recurring charges.
               </p>
             </div>
@@ -324,20 +324,20 @@ export default function PricingPage() {
                   key={option.name}
                   className={`group relative border-2 transition-all duration-300 hover:-translate-y-1 ${
                     option.badge
-                      ? "border-secondary/50 bg-gradient-to-br from-accent/30 via-card to-secondary/5 shadow-2xl shadow-secondary/10"
-                      : "border-border bg-card shadow-xl hover:border-secondary/30 hover:shadow-2xl"
+                      ? "border-cyan-200 bg-gradient-to-br from-cyan-50 via-white to-teal-50 shadow-2xl shadow-cyan-500/10"
+                      : "border-slate-200 bg-white shadow-xl hover:border-cyan-200 hover:shadow-2xl"
                   }`}
                 >
                   {option.badge && (
                     <div className="absolute -top-4 left-1/2 -translate-x-1/2 z-10">
-                      <div className="flex items-center gap-2 rounded-full bg-gradient-to-r from-secondary to-secondary/80 px-5 py-2 text-sm font-bold text-white shadow-lg">
+                      <div className="flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-teal-500 px-5 py-2 text-sm font-bold text-white shadow-lg">
                         <Sparkles className="h-4 w-4" />
                         {option.badge}
                       </div>
                     </div>
                   )}
 
-                  <div className={`h-2 overflow-hidden rounded-t-lg ${option.badge ? "bg-gradient-to-r from-secondary via-primary to-secondary" : "bg-gradient-to-r from-secondary/30 to-primary/30"}`} />
+                  <div className={`h-2 overflow-hidden rounded-t-lg ${option.badge ? "bg-gradient-to-r from-cyan-500 via-teal-500 to-cyan-500" : "bg-gradient-to-r from-cyan-200 to-teal-200"}`} />
 
                   <CardContent className="p-10">
                     <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
@@ -396,35 +396,35 @@ export default function PricingPage() {
         </section>
 
         {/* Trust Signals */}
-        <section className="border-t bg-gradient-to-br from-primary/5 via-background to-accent/10 py-24">
+        <section className="border-t bg-gradient-to-br from-teal-50/50 via-white to-cyan-50/30 py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="grid gap-8 md:grid-cols-3">
               <div className="group flex flex-col items-center text-center transition-transform duration-300 hover:-translate-y-1">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-primary/80 text-white shadow-lg shadow-primary/20 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-primary/30">
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-500 to-teal-600 text-white shadow-lg shadow-teal-500/20 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-teal-500/30">
                   <Shield className="h-7 w-7" />
                 </div>
-                <h3 className="mt-6 text-lg font-bold text-foreground">🔒 Secure Payments</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                <h3 className="mt-6 text-lg font-bold text-slate-900">🔒 Secure Payments</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   Bank-level encryption through trusted South African payment providers.
                 </p>
               </div>
 
               <div className="group flex flex-col items-center text-center transition-transform duration-300 hover:-translate-y-1">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-secondary to-secondary/80 text-white shadow-lg shadow-secondary/20 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-secondary/30">
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-cyan-500 to-cyan-600 text-white shadow-lg shadow-cyan-500/20 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-cyan-500/30">
                   <Zap className="h-7 w-7" />
                 </div>
-                <h3 className="mt-6 text-lg font-bold text-foreground">⚡ Cancel Anytime</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                <h3 className="mt-6 text-lg font-bold text-slate-900">⚡ Cancel Anytime</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   No long-term commitments. Cancel your subscription with one click.
                 </p>
               </div>
 
               <div className="group flex flex-col items-center text-center transition-transform duration-300 hover:-translate-y-1">
-                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary via-secondary to-primary text-white shadow-lg shadow-primary/20 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-primary/30">
+                <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-teal-500 via-cyan-500 to-teal-500 text-white shadow-lg shadow-teal-500/20 transition-all duration-300 group-hover:shadow-xl group-hover:shadow-teal-500/30">
                   <Check className="h-7 w-7" />
                 </div>
-                <h3 className="mt-6 text-lg font-bold text-foreground">🎉 7-Day Free Trial</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                <h3 className="mt-6 text-lg font-bold text-slate-900">🎉 7-Day Free Trial</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   Try Professional plan free for 7 days. No credit card required.
                 </p>
               </div>
@@ -433,66 +433,66 @@ export default function PricingPage() {
         </section>
 
         {/* FAQ Section */}
-        <section className="border-t bg-muted/40 py-20">
+        <section className="border-t bg-slate-50 py-20">
           <div className="mx-auto max-w-3xl px-6 lg:px-8">
-            <h2 className="text-center text-3xl font-semibold tracking-tight text-foreground">
+            <h2 className="text-center text-3xl font-semibold tracking-tight text-slate-900">
               Frequently asked questions
             </h2>
 
             <div className="mt-12 space-y-8">
               <div>
-                <h3 className="text-base font-semibold text-foreground">
+                <h3 className="text-base font-semibold text-slate-900">
                   Do I need a credit card for the free trial?
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   No, you can start your 7-day free trial without providing any payment information.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-base font-semibold text-foreground">
+                <h3 className="text-base font-semibold text-slate-900">
                   Are prices inclusive of VAT?
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   Yes, all prices shown include South African VAT (15%). You'll see the exact amount
                   before completing payment.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-base font-semibold text-foreground">
+                <h3 className="text-base font-semibold text-slate-900">
                   Can I upgrade or downgrade my plan?
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   You can change your plan at any time. Changes take effect immediately, and we'll prorate any charges.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-base font-semibold text-foreground">
+                <h3 className="text-base font-semibold text-slate-900">
                   What payment methods do you accept?
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   We accept major credit cards, debit cards, and EFT payments through our secure South
                   African payment partners.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-base font-semibold text-foreground">
+                <h3 className="text-base font-semibold text-slate-900">
                   What happens to my lifetime access if you change features?
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   Lifetime access means you get all current Professional features plus all future updates
                   and new features we add. Your one-time payment covers everything.
                 </p>
               </div>
 
               <div>
-                <h3 className="text-base font-semibold text-foreground">
+                <h3 className="text-base font-semibold text-slate-900">
                   What happens if I cancel my subscription?
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   You'll retain access until the end of your current billing period.
                   After that, your account will be downgraded to read-only access, and no further charges
                   will be made.
@@ -500,13 +500,13 @@ export default function PricingPage() {
               </div>
 
               <div>
-                <h3 className="text-base font-semibold text-foreground">
+                <h3 className="text-base font-semibold text-slate-900">
                   Do you offer refunds?
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
                   We handle refund requests on a case-by-case basis. If you're not satisfied within the
                   first 30 days, contact us and we'll work something out. See our{" "}
-                  <Link href="/legal/billing" className="text-primary hover:underline">
+                  <Link href="/legal/billing" className="text-teal-600 hover:underline">
                     Billing Terms
                   </Link>{" "}
                   for details.
@@ -517,8 +517,8 @@ export default function PricingPage() {
         </section>
 
         {/* Final CTA */}
-        <section className="relative overflow-hidden border-t bg-gradient-to-br from-primary via-primary/90 to-secondary py-24">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.1)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.1)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
+        <section className="relative overflow-hidden border-t bg-gradient-to-br from-slate-800 via-slate-700 to-teal-800 py-24">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:4rem_4rem]" />
           <div className="relative mx-auto max-w-3xl px-6 text-center lg:px-8">
             <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">
               Ready to Transform Your Business?
@@ -530,7 +530,7 @@ export default function PricingPage() {
               <Button
                 onClick={() => handlePlanClick("Professional", false)}
                 disabled={loading}
-                className="bg-white text-primary hover:bg-white/90 shadow-xl shadow-black/20 text-lg font-bold px-8 py-6 h-auto"
+                className="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-400 hover:to-cyan-400 text-white shadow-xl shadow-black/20 text-lg font-bold px-8 py-6 h-auto"
                 size="lg"
               >
                 {isLoggedIn ? "🚀 Subscribe Now" : "✨ Start Free Trial"}
