@@ -158,7 +158,7 @@ export default function JobsPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="text-muted-foreground">Loading jobs...</div>
+        <div className="text-slate-600">Loading jobs...</div>
       </div>
     )
   }
@@ -167,10 +167,10 @@ export default function JobsPage() {
     <div className="space-y-6 pb-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-slate-900 via-cyan-600 to-slate-900 bg-clip-text text-transparent">
             Jobs
           </h1>
-          <p className="text-sm text-muted-foreground mt-2">Track and manage your ongoing work</p>
+          <p className="text-sm text-slate-600 mt-2">Track and manage your ongoing work</p>
         </div>
         <div className="flex gap-2">
           <Link href="/dashboard/jobs/kanban">
@@ -179,7 +179,7 @@ export default function JobsPage() {
               Kanban View
             </Button>
           </Link>
-          <Button onClick={handleCreateJob} size="lg" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity shadow-lg">
+          <Button onClick={handleCreateJob} size="lg" className="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 shadow-lg text-white">
             <Plus className="mr-2 h-4 w-4" />
             Create Job
           </Button>
@@ -187,27 +187,27 @@ export default function JobsPage() {
       </div>
 
       {jobs.length === 0 ? (
-        <Card className="relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+        <Card className="relative overflow-hidden rounded-2xl border-0 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
           <CardContent className="flex flex-col items-center justify-center py-16">
-            <div className="rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 p-6 mb-4">
-              <Briefcase className="h-12 w-12 text-primary" />
+            <div className="rounded-full bg-gradient-to-br from-teal-500/20 to-cyan-500/20 p-6 mb-4">
+              <Briefcase className="h-12 w-12 text-cyan-600" />
             </div>
-            <CardTitle className="mb-2">No jobs yet</CardTitle>
-            <CardDescription className="text-center mb-6 max-w-sm">
+            <CardTitle className="mb-2 text-slate-900">No jobs yet</CardTitle>
+            <CardDescription className="text-center mb-6 max-w-sm text-slate-600">
               Start managing your work by creating your first job. Keep track of deadlines and progress all in one
               place.
             </CardDescription>
-            <Button onClick={handleCreateJob} className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity">
+            <Button onClick={handleCreateJob} className="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white">
               <Plus className="mr-2 h-4 w-4" />
               Create Your First Job
             </Button>
           </CardContent>
         </Card>
       ) : (
-        <Card className="relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
-          <CardHeader className="border-b border-border/40">
-            <CardTitle className="text-xl font-bold">All Jobs</CardTitle>
-            <CardDescription>A list of all your jobs and their current status</CardDescription>
+        <Card className="relative overflow-hidden rounded-2xl border-0 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+          <CardHeader className="border-b border-slate-200">
+            <CardTitle className="text-xl font-bold text-slate-900">All Jobs</CardTitle>
+            <CardDescription className="text-slate-600">A list of all your jobs and their current status</CardDescription>
           </CardHeader>
           <CardContent className="p-0">
             <div className="overflow-x-auto">

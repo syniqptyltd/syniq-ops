@@ -121,53 +121,53 @@ export default function ExpensesPage() {
     <div className="space-y-6 pb-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-slate-900 via-teal-600 to-slate-900 bg-clip-text text-transparent">
             Expenses
           </h1>
-          <p className="text-sm text-muted-foreground mt-2">Track and manage your business expenses</p>
+          <p className="text-sm text-slate-600 mt-2">Track and manage your business expenses</p>
         </div>
-        <Button onClick={handleCreate} size="lg" className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity shadow-lg">
+        <Button onClick={handleCreate} size="lg" className="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 shadow-lg text-white">
           <Plus className="mr-2 h-4 w-4" />
           Add Expense
         </Button>
       </div>
 
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        <Card className="group relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-card to-muted/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-1">
+        <Card className="group relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-white to-teal-50/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-1">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
-              <div className="rounded-xl p-3 bg-gradient-to-br from-primary/20 to-primary/10">
-                <Receipt className="h-6 w-6 text-primary" />
+              <div className="rounded-xl p-3 bg-gradient-to-br from-teal-500/20 to-teal-500/10">
+                <Receipt className="h-6 w-6 text-teal-600" />
               </div>
             </div>
             <div>
-              <p className="text-sm text-muted-foreground mb-1">Total Expenses</p>
-              <p className="text-3xl font-bold tracking-tight">R {totalExpenses.toLocaleString()}</p>
-              <p className="text-xs text-muted-foreground mt-1">{expenses.length} expenses recorded</p>
+              <p className="text-sm text-slate-600 mb-1">Total Expenses</p>
+              <p className="text-3xl font-bold tracking-tight text-slate-900">R {totalExpenses.toLocaleString()}</p>
+              <p className="text-xs text-slate-600 mt-1">{expenses.length} expenses recorded</p>
             </div>
           </CardContent>
-          <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-primary/10 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
+          <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-teal-500/10 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
         </Card>
 
-        <Card className="group relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-card to-muted/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-1">
+        <Card className="group relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-white to-cyan-50/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-1">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
-              <div className="rounded-xl p-3 bg-gradient-to-br from-secondary/20 to-secondary/10">
-                <Receipt className="h-6 w-6 text-secondary" />
+              <div className="rounded-xl p-3 bg-gradient-to-br from-cyan-500/20 to-cyan-500/10">
+                <Receipt className="h-6 w-6 text-cyan-600" />
               </div>
             </div>
             <div>
-              <p className="text-sm text-muted-foreground mb-1">VAT Claimable</p>
-              <p className="text-3xl font-bold tracking-tight">R {totalVatClaimable.toLocaleString()}</p>
-              <p className="text-xs text-muted-foreground mt-1">
+              <p className="text-sm text-slate-600 mb-1">VAT Claimable</p>
+              <p className="text-3xl font-bold tracking-tight text-slate-900">R {totalVatClaimable.toLocaleString()}</p>
+              <p className="text-xs text-slate-600 mt-1">
                 {expenses.filter((e) => e.is_vat_claimable).length} claimable expenses
               </p>
             </div>
           </CardContent>
-          <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-secondary/10 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
+          <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-cyan-500/10 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
         </Card>
 
-        <Card className="group relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-card to-muted/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-1">
+        <Card className="group relative overflow-hidden rounded-2xl border-0 bg-gradient-to-br from-white to-amber-50/20 shadow-[0_8px_30px_rgb(0,0,0,0.12)] transition-all duration-300 hover:shadow-[0_20px_60px_rgb(0,0,0,0.15)] hover:-translate-y-1">
           <CardContent className="p-6">
             <div className="flex items-center justify-between mb-4">
               <div className="rounded-xl p-3 bg-gradient-to-br from-amber-500/20 to-amber-500/10">
@@ -175,8 +175,8 @@ export default function ExpensesPage() {
               </div>
             </div>
             <div>
-              <p className="text-sm text-muted-foreground mb-1">This Month</p>
-              <p className="text-3xl font-bold tracking-tight">
+              <p className="text-sm text-slate-600 mb-1">This Month</p>
+              <p className="text-3xl font-bold tracking-tight text-slate-900">
                 R{" "}
                 {expenses
                   .filter((exp) => {
@@ -189,28 +189,28 @@ export default function ExpensesPage() {
                   .reduce((sum, exp) => sum + exp.amount, 0)
                   .toLocaleString()}
               </p>
-              <p className="text-xs text-muted-foreground mt-1">Current month expenses</p>
+              <p className="text-xs text-slate-600 mt-1">Current month expenses</p>
             </div>
           </CardContent>
           <div className="absolute -bottom-4 left-4 right-4 h-8 bg-gradient-to-b from-amber-500/10 to-transparent blur-xl opacity-50 transition-opacity duration-300 group-hover:opacity-70 -z-10" />
         </Card>
       </div>
 
-      <Card className="relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
-        <CardHeader className="border-b border-border/40">
-          <CardTitle className="text-xl font-bold">Expense History</CardTitle>
-          <CardDescription>View and manage all your business expenses</CardDescription>
+      <Card className="relative overflow-hidden rounded-2xl border-0 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+        <CardHeader className="border-b border-slate-200">
+          <CardTitle className="text-xl font-bold text-slate-900">Expense History</CardTitle>
+          <CardDescription className="text-slate-600">View and manage all your business expenses</CardDescription>
         </CardHeader>
         <CardContent className="p-6">
           {isLoading ? (
             <div className="flex items-center justify-center py-8">
-              <p className="text-muted-foreground">Loading expenses...</p>
+              <p className="text-slate-600">Loading expenses...</p>
             </div>
           ) : expenses.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-8 text-center">
-              <Receipt className="h-12 w-12 text-muted-foreground mb-4" />
-              <p className="text-muted-foreground mb-4">No expenses yet</p>
-              <Button onClick={handleCreate}>
+              <Receipt className="h-12 w-12 text-slate-600 mb-4" />
+              <p className="text-slate-600 mb-4">No expenses yet</p>
+              <Button onClick={handleCreate} className="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white">
                 <Plus className="mr-2 h-4 w-4" />
                 Add Your First Expense
               </Button>
@@ -239,7 +239,7 @@ export default function ExpensesPage() {
                       <TableCell>
                         <div className="font-medium">{expense.description}</div>
                         {expense.reference_number && (
-                          <div className="text-xs text-muted-foreground">Ref: {expense.reference_number}</div>
+                          <div className="text-xs text-slate-600">Ref: {expense.reference_number}</div>
                         )}
                       </TableCell>
                       <TableCell>
@@ -256,7 +256,7 @@ export default function ExpensesPage() {
                             R {expense.vat_amount.toLocaleString()}
                           </Badge>
                         ) : (
-                          <span className="text-muted-foreground">-</span>
+                          <span className="text-slate-600">-</span>
                         )}
                       </TableCell>
                       <TableCell className="text-right">

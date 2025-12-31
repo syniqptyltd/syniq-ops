@@ -85,7 +85,7 @@ export default function ClientsPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <div className="text-muted-foreground">Loading clients...</div>
+        <div className="text-slate-600">Loading clients...</div>
       </div>
     )
   }
@@ -94,10 +94,10 @@ export default function ClientsPage() {
     <div className="space-y-6 pb-8">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-foreground via-primary to-foreground bg-clip-text text-transparent">
+          <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-slate-900 via-teal-600 to-slate-900 bg-clip-text text-transparent">
             Clients
           </h1>
-          <p className="text-sm text-muted-foreground mt-2">
+          <p className="text-sm text-slate-600 mt-2">
             Manage your client relationships
             {permissions.maxClients !== null && (
               <span className="ml-2 text-sm">
@@ -110,7 +110,7 @@ export default function ClientsPage() {
           onClick={handleAddClient}
           disabled={!canAddClient}
           size="lg"
-          className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity shadow-lg"
+          className="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 shadow-lg text-white"
         >
           <Plus className="mr-2 h-4 w-4" />
           Add Client
@@ -154,26 +154,26 @@ export default function ClientsPage() {
       )}
 
       {clients.length === 0 ? (
-        <Card className="relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+        <Card className="relative overflow-hidden rounded-2xl border-0 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
           <CardContent className="flex flex-col items-center justify-center py-16">
-            <div className="rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 p-6 mb-4">
-              <Users className="h-12 w-12 text-primary" />
+            <div className="rounded-full bg-gradient-to-br from-teal-500/20 to-cyan-500/20 p-6 mb-4">
+              <Users className="h-12 w-12 text-teal-600" />
             </div>
-            <CardTitle className="mb-2">No clients yet</CardTitle>
-            <CardDescription className="text-center mb-6 max-w-sm">
+            <CardTitle className="mb-2 text-slate-900">No clients yet</CardTitle>
+            <CardDescription className="text-center mb-6 max-w-sm text-slate-600">
               Get started by adding your first client. Keep track of all your business relationships in one place.
             </CardDescription>
-            <Button onClick={handleAddClient} className="bg-gradient-to-r from-primary to-secondary hover:opacity-90 transition-opacity">
+            <Button onClick={handleAddClient} className="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white">
               <Plus className="mr-2 h-4 w-4" />
               Add Your First Client
             </Button>
           </CardContent>
         </Card>
       ) : (
-        <Card className="relative overflow-hidden rounded-2xl border-0 bg-card shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
-          <CardHeader className="border-b border-border/40">
-            <CardTitle className="text-xl font-bold">All Clients</CardTitle>
-            <CardDescription>A list of all your clients and their contact information</CardDescription>
+        <Card className="relative overflow-hidden rounded-2xl border-0 bg-white shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
+          <CardHeader className="border-b border-slate-200">
+            <CardTitle className="text-xl font-bold text-slate-900">All Clients</CardTitle>
+            <CardDescription className="text-slate-600">A list of all your clients and their contact information</CardDescription>
           </CardHeader>
           <CardContent className="p-0">
             <div className="overflow-x-auto">
