@@ -27,7 +27,7 @@ export async function POST(request: Request) {
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'Syniq Ops <syniq.store@gmail.com>',
+      from: 'Syniq Ops <onboarding@resend.dev>',
       to: 'support@syniqsolutions.co.za',
       replyTo: workEmail,
       subject: `Contact Form: ${subject}`,
