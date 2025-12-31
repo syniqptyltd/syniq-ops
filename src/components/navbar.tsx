@@ -5,15 +5,15 @@ import { Sparkles } from "lucide-react"
 
 export function Navbar() {
   return (
-    <nav className="sticky top-0 z-50 border-b-2 border-primary/10 bg-background/95 backdrop-blur-xl supports-[backdrop-filter]:bg-background/90 shadow-lg shadow-primary/5">
+    <nav className="sticky top-0 z-50 border-b-2 border-teal-100 bg-white/95 backdrop-blur-xl supports-[backdrop-filter]:bg-white/90 shadow-lg shadow-teal-500/5">
       {/* Subtle gradient line at top */}
-      <div className="h-1 bg-gradient-to-r from-primary via-secondary to-primary" />
+      <div className="h-1 bg-gradient-to-r from-teal-500 via-cyan-500 to-teal-500" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center">
             <Link href="/" className="group flex items-center gap-2.5 transition-all hover:scale-105">
-              <div className="relative h-9 w-9 overflow-hidden rounded-lg ring-2 ring-primary/20 transition-all group-hover:ring-primary/40 group-hover:shadow-lg group-hover:shadow-primary/20">
+              <div className="relative h-9 w-9 overflow-hidden rounded-lg ring-2 ring-teal-200 transition-all group-hover:ring-teal-400 group-hover:shadow-lg group-hover:shadow-teal-500/20">
                 <Image
                   src="/SYNIQ-LOGO.png"
                   alt="Syniq Ops Logo"
@@ -22,7 +22,7 @@ export function Navbar() {
                   priority
                 />
               </div>
-              <span className="bg-gradient-to-r from-foreground to-primary bg-clip-text text-xl font-bold text-transparent">
+              <span className="bg-gradient-to-r from-slate-900 to-teal-600 bg-clip-text text-xl font-bold text-transparent">
                 Syniq Ops
               </span>
             </Link>
@@ -31,41 +31,41 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <Button
               variant="ghost"
-              className="hidden lg:inline-flex font-semibold hover:bg-primary/10 hover:text-primary transition-all"
+              className="hidden lg:inline-flex font-semibold hover:bg-teal-100 hover:text-teal-700 transition-all"
               asChild
             >
               <Link href="/#features">Features</Link>
             </Button>
             <Button
               variant="ghost"
-              className="hidden md:inline-flex font-semibold hover:bg-primary/10 hover:text-primary transition-all"
+              className="hidden md:inline-flex font-semibold hover:bg-teal-100 hover:text-teal-700 transition-all"
               asChild
             >
               <Link href="/pricing">Pricing</Link>
             </Button>
             <Button
               variant="ghost"
-              className="hidden lg:inline-flex font-semibold hover:bg-primary/10 hover:text-primary transition-all"
+              className="hidden lg:inline-flex font-semibold hover:bg-teal-100 hover:text-teal-700 transition-all"
               asChild
             >
               <Link href="/about">About Us</Link>
             </Button>
             <Button
               variant="ghost"
-              className="hidden lg:inline-flex font-semibold hover:bg-primary/10 hover:text-primary transition-all"
+              className="hidden lg:inline-flex font-semibold hover:bg-teal-100 hover:text-teal-700 transition-all"
               asChild
             >
               <Link href="/contact">Contact</Link>
             </Button>
             <Button
               variant="ghost"
-              className="hidden sm:inline-flex font-semibold hover:bg-secondary/10 hover:text-secondary transition-all"
+              className="hidden sm:inline-flex font-semibold hover:bg-cyan-100 hover:text-cyan-700 transition-all"
               asChild
             >
               <Link href="/login">Log In</Link>
             </Button>
             <Button
-              className="group btn-shimmer relative overflow-hidden bg-gradient-to-r from-primary to-secondary font-bold shadow-lg shadow-primary/30 transition-all hover:scale-105 hover:shadow-xl hover:shadow-primary/40"
+              className="group btn-shimmer relative overflow-hidden bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 font-bold shadow-lg transition-all hover:scale-105 hover:shadow-xl"
               asChild
             >
               <Link href="/pricing">
