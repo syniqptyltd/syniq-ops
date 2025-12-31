@@ -32,33 +32,6 @@ export default function AboutPage() {
     }
   ]
 
-  const team = [
-    {
-      name: "Sarah Chen",
-      role: "CEO & Co-founder",
-      description: "Sarah Chen is a cat of se-founder, lin gemelietad and star ofnonman service companies and rewired to rem businesses spaces.",
-      image: "/team/sarah.jpg"
-    },
-    {
-      name: "David Miller",
-      role: "CTO",
-      description: "David Miller is a veer reduction professional servic intemberx and customen alechy our communalises and essential clarty and learn CEO.",
-      image: "/team/david.jpg"
-    },
-    {
-      name: "Maria Rodriguez",
-      role: "Head of Customer Success",
-      description: "Maria Redtigues, is head of your customer Success is arworiding and optional businesses at least of customer success.",
-      image: "/team/maria.jpg"
-    },
-    {
-      name: "Kenji Tanaka",
-      role: "Lead Product Designer",
-      description: "Kenji Tanaka Lead Product Designer percome create and crous estrones designer has design merles, and product scenergies.",
-      image: "/team/kenji.jpg"
-    }
-  ]
-
   return (
     <div className="flex min-h-screen flex-col">
       <Navbar />
@@ -92,11 +65,13 @@ export default function AboutPage() {
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
                 <div className="relative aspect-video rounded-xl overflow-hidden shadow-2xl">
-                  <div className="w-full h-full bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                    <div className="text-white/50 text-center">
-                      <p className="text-sm">Team collaboration image</p>
-                    </div>
-                  </div>
+                  <Image
+                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop"
+                    alt="Team collaboration"
+                    fill
+                    className="object-cover"
+                    unoptimized
+                  />
                 </div>
               </motion.div>
             </div>
@@ -140,41 +115,6 @@ export default function AboutPage() {
                   </motion.div>
                 )
               })}
-            </div>
-          </div>
-        </section>
-
-        {/* Meet the Team Section */}
-        <section className="py-20 bg-white">
-          <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-            <h2 className="text-3xl font-bold text-slate-900 text-center mb-12">Meet the Team</h2>
-            <div className="grid gap-8 sm:grid-cols-2">
-              {team.map((member, index) => (
-                <motion.div
-                  key={member.name}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <Card className="border-2 border-slate-200 shadow-lg overflow-hidden">
-                    <CardContent className="p-6">
-                      <div className="flex gap-6">
-                        <div className="flex-shrink-0">
-                          <div className="w-24 h-24 rounded-full bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center text-white font-bold text-2xl">
-                            {member.name.split(' ').map(n => n[0]).join('')}
-                          </div>
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="text-xl font-bold text-slate-900 mb-1">{member.name}</h3>
-                          <p className="text-sm font-semibold text-teal-600 mb-3">{member.role}</p>
-                          <p className="text-sm text-slate-600 leading-relaxed">{member.description}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
-              ))}
             </div>
           </div>
         </section>

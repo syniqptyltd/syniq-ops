@@ -56,8 +56,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="text-xl font-bold text-slate-900 mb-1">Email Us</h3>
-                    <a href="mailto:support@syniqops.com" className="text-slate-600 hover:text-teal-600 transition-colors">
-                      support@syniqops.com
+                    <a href="mailto:support@syniqsolutions.co.za" className="text-slate-600 hover:text-teal-600 transition-colors">
+                      support@syniqsolutions.co.za
                     </a>
                   </div>
                 </div>
