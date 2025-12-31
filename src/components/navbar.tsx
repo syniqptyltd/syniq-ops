@@ -31,6 +31,13 @@ export function Navbar() {
           <div className="flex items-center gap-3">
             <Button
               variant="ghost"
+              className="hidden lg:inline-flex font-semibold hover:bg-primary/10 hover:text-primary transition-all"
+              asChild
+            >
+              <Link href="/#features">Features</Link>
+            </Button>
+            <Button
+              variant="ghost"
               className="hidden md:inline-flex font-semibold hover:bg-primary/10 hover:text-primary transition-all"
               asChild
             >
@@ -38,17 +45,30 @@ export function Navbar() {
             </Button>
             <Button
               variant="ghost"
+              className="hidden lg:inline-flex font-semibold hover:bg-primary/10 hover:text-primary transition-all"
+              asChild
+            >
+              <Link href="/about">About Us</Link>
+            </Button>
+            <Button
+              variant="ghost"
+              className="hidden lg:inline-flex font-semibold hover:bg-primary/10 hover:text-primary transition-all"
+              asChild
+            >
+              <Link href="/contact">Contact</Link>
+            </Button>
+            <Button
+              variant="ghost"
               className="hidden sm:inline-flex font-semibold hover:bg-secondary/10 hover:text-secondary transition-all"
               asChild
             >
-              <Link href="/login">Sign In</Link>
+              <Link href="/login">Log In</Link>
             </Button>
             <Button
               className="group btn-shimmer relative overflow-hidden bg-gradient-to-r from-primary to-secondary font-bold shadow-lg shadow-primary/30 transition-all hover:scale-105 hover:shadow-xl hover:shadow-primary/40"
               asChild
             >
               <Link href="/pricing">
-                <Sparkles className="mr-2 h-4 w-4 transition-transform group-hover:rotate-12" />
                 Get Started
               </Link>
             </Button>
