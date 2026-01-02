@@ -8,6 +8,13 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 
 export default function AboutPage() {
+  const scrollToMission = () => {
+    const missionSection = document.getElementById('mission-section')
+    if (missionSection) {
+      missionSection.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   const values = [
     {
       icon: Settings,
@@ -55,7 +62,10 @@ export default function AboutPage() {
                 <p className="text-lg text-slate-600 mb-8">
                   Our mission is to simplify operations and help you focus on what matters most: your customers.
                 </p>
-                <button className="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg">
+                <button
+                  onClick={scrollToMission}
+                  className="bg-gradient-to-r from-teal-500 to-cyan-500 hover:from-teal-600 hover:to-cyan-600 text-white px-6 py-3 rounded-lg font-semibold transition-all shadow-lg hover:shadow-xl"
+                >
                   See Our Story
                 </button>
               </motion.div>
@@ -82,7 +92,7 @@ export default function AboutPage() {
         </section>
 
         {/* Mission Section */}
-        <section className="py-16 bg-gradient-to-br from-cyan-50/50 via-white to-teal-50/30">
+        <section id="mission-section" className="py-16 bg-gradient-to-br from-cyan-50/50 via-white to-teal-50/30">
           <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl font-bold text-slate-900 mb-6">Our Mission</h2>
             <p className="text-lg text-slate-600 leading-relaxed">
