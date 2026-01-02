@@ -33,10 +33,9 @@ export const metadata: Metadata = {
     "business operations platform",
     "automated invoicing"
   ],
-  authors: [{ name: "Syniq Ops" }],
-  creator: "Syniq Ops",
-  publisher: "Syniq Ops",
-  generator: "v0.app",
+  authors: [{ name: "Mikhail" }],
+  creator: "Syniq Solutions",
+  publisher: "Syniq Pty Ltd",
   icons: {
     icon: "/SYNIQ-Favicon.png",
     apple: "/SYNIQ-Favicon.png",
@@ -103,9 +102,9 @@ export default function RootLayout({
       addressCountry: 'ZA',
     },
     sameAs: [
-      'https://www.facebook.com/syniqsolutions',
-      'https://twitter.com/syniqsolutions',
-      'https://www.linkedin.com/company/syniqsolutions',
+      'https://www.facebook.com/syniqptyltd',
+      'https://twitter.com/syniqptyltd',
+      'https://www.linkedin.com/company/syniqptyltd',
     ],
     contactPoint: {
       '@type': 'ContactPoint',
